@@ -1,0 +1,68 @@
+h1
+  font-size: $size-1
+
+h2
+  font-size: $size-2
+
+h3
+  font-size: $size-3
+
+h4
+  font-size: $size-4
+
+.nav.is-home
+  background-color: rgba(255, 255, 255, .85) !important
+  position: fixed
+  width: 100%
+
+.is-styled
+  font-family: 'IM Fell English SC', serif
+
+.content.is-light
+  color: $grey-lighter
+
+.content.is-light > a:link
+  color: $white
+
+@include tablet
+  .hero.is-landing
+    background-color: transparent !important
+
+  .hero.is-landing:after
+    background: url(/images/house_bg.jpg) 0 0 / cover no-repeat
+    bottom: 0
+    content: ""
+    left: 0
+    opacity: .2
+    position: absolute
+    right: 0
+    top: 0
+    z-index: -1
+
+@include mobile
+  .hero.is-landing
+    background-color: rgba(0, 53, 95, .1) !important
+  
+  .hero.is-landing:after
+    background: url(/images/crest.png) center 75px / 80% no-repeat fixed padding-box content-box
+    bottom: 0
+    content: ""
+    left: 0
+    opacity: .1
+    position: absolute
+    right: 0
+    top: 0
+    z-index: -1
+
+.footer
+  background-color: $primary
+  color: $white-ter
+
+.to-top
+  background-color: $grey-light
+  border-radius: $radius
+  bottom: 1rem
+  opacity: .3
+  padding: 1rem
+  position: fixed
+  right: 1rem
