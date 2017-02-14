@@ -2,7 +2,7 @@
     <div class="hero-body">
         <div class="container">
             <div class="columns">
-                <div class="column has-text-centered">
+                <div class="column has-text-centered is-hidden-touch">
                     <figure class="image is-4by3">
                         <img src="/images/sigs_img1.png">
                     </figure>
@@ -14,6 +14,11 @@
                     <div class="has-text-right">
                         <a href="#" class="button is-primary is-outlined">Read More</a>
                     </div>
+                </div>
+                <div class="column has-text-centered is-hidden-desktop">
+                    <figure class="image is-4by3">
+                        <img src="/images/sigs_img1.png">
+                    </figure>
                 </div>
             </div>
         </div>
