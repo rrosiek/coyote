@@ -12,13 +12,13 @@
                 </div>
             </div>
             <div class="columns">
-                <div class="column is-3 is-offset-2">
+                <div class="column is-4">
                     <h2 class="is-styled">Friendship</h2>
                 </div>
-                <div class="column is-3">
+                <div class="column is-4">
                     <h2 class="is-styled">Justice</h2>
                 </div>
-                <div class="column is-3">
+                <div class="column is-4">
                     <h2 class="is-styled">Learning</h2>
                 </div>
             </div>
