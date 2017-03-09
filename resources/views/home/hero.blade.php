@@ -1,6 +1,6 @@
 <section class="hero is-fullheight is-landing" id="home">
     <div class="hero-head">
-        @include('home.nav')
+        @include('partials.nav')
     </div>
     <div class="hero-body">
         <div class="container has-text-centered">

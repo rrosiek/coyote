@@ -1,49 +1,44 @@
-<nav class="nav">
-    <div class="nav-left">
-        <a class="nav-item" href="/">
-            <span class="logo">Sigma Chi Iota Zeta</span>
-        </a>
-    </div>
+<header class="nav is-home">
+    <div class="container is-fluid">
+        <div class="nav-left">
+            <a href="/" class="nav-item">
+                <h4 class="is-styled is-primary">Sigma Chi Iota Zeta</h4>
+            </a>
+        </div>
 
-    <div class="nav-center">
-        <a class="nav-item">
-            ABOUT US
-        </a>
-        <a class="nav-item">
-            BROTHERS
-        </a>
-        <a class="nav-item">
-            PHILANTHROPY
-        </a>
-        <a class="nav-item">
-            PLEDGING
-        </a>
-        <a class="nav-item">
-            MEMBERS
-        </a>
-    </div>
-
-    <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-    <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
     <span class="nav-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
 
-    <!-- This "nav-menu" is hidden on mobile -->
-    <!-- Add the modifier "is-active" to display it on mobile -->
     <div class="nav-right nav-menu">
-        <a class="nav-item">
+        @if(Route::currentRouteName() === 'home')
+            <a class="nav-item" v-scroll-to="{ id: 'aboutus' }">
+                ABOUT US
+            </a>
+            <a class="nav-item" v-scroll-to="{ id: 'brothers' }">
+                BROTHERS
+            </a>
+            <a class="nav-item" v-scroll-to="{ id: 'philanthropy' }">
+                PHILANTHROPY
+            </a>
+            <a class="nav-item" v-scroll-to="{ id: 'pledging' }">
+                PLEDGING
+            </a>
+        @else
+            <a class="nav-item" href="/">HOME</a>
+        @endif
+        <a class="nav-item" href="/members">MEMBERS</a>
+        <a href="https://www.facebook.com/groups/71074270336/" class="nav-item">
             <span class="icon">
                 <i class="fa fa-facebook"></i>
             </span>
         </a>
-        <a class="nav-item">
+        <a href="https://github.com/rrosiek/coyote" class="nav-item">
             <span class="icon">
                 <i class="fa fa-github"></i>
             </span>
         </a>
-
     </div>
-</nav>
+</header>

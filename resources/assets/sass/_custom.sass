@@ -10,10 +10,9 @@ h3
 h4
   font-size: $size-4
 
-// .nav.is-home
-  background-color: rgba(255, 255, 255, .9) !important
-  position: fixed
-  width: 100%
+label.is-required:after
+  content: " *"
+  color: $danger
 
 .is-styled
   font-family: 'IM Fell English SC', serif
@@ -54,6 +53,9 @@ h4
     top: 0
     z-index: -1
 
+.hero.is-badged
+  background: $primary url(/images/badge-faded.png) right top no-repeat fixed padding-box content-box
+
 .footer
   background-color: $primary
   color: $white-ter
@@ -66,3 +68,41 @@ h4
   padding: 1rem
   position: fixed
   right: 1rem
+
+.datepicker
+  position: relative
+
+.calendar
+  max-width: $calendarWidth
+  position: absolute
+  width: $calendarWidth
+  z-index: 100
+  header
+    p
+      flex-grow: 1
+      font-weight: 700
+      padding: .75rem
+    p, a
+      cursor: pointer
+      text-align: center
+      &:hover
+        background: $white-ter
+
+  .cell
+    text-align: center
+    vertical-align: middle
+    &:not(.blank)
+      cursor: pointer
+      &:hover
+        background-color: lighten($primary, 70%)
+
+    &.selected
+      background-color: $primary
+      color: $white-ter
+
+    &.day-header
+      font-size: 75%
+      white-space: no-wrap
+      cursor: inherit
+      &:hover
+        background: inherit
