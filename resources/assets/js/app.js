@@ -3,8 +3,9 @@
 import Vue from 'vue'
 import axios from 'axios'
 // import filters from './filters'
-import scrollTo from './directives/scrollTo'
 import isLoading from './directives/isLoading'
+import notifyClose from './directives/notifyClose'
+import scrollTo from './directives/scrollTo'
 import datepicker from './components/datepicker'
 import confirm from './components/confirm'
 
@@ -31,8 +32,9 @@ Object.defineProperties(Vue.prototype, {
     }
 })
 
-Vue.directive('scrollTo', scrollTo)
 Vue.directive('isLoading', isLoading)
+Vue.directive('notifyClose', notifyClose)
+Vue.directive('scrollTo', scrollTo)
 Vue.component('datepicker', datepicker)
 Vue.component('confirm', confirm)
 

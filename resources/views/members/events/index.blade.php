@@ -7,6 +7,7 @@
 
 <section class="section">
     <div class="container is-fluid">
+        @include('partials.notify')
         <div class="level">
             <div class="level-left">
                 <p class="level-item">
@@ -25,7 +26,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Description</th>
+                    <th>Details</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -33,21 +34,19 @@
                 @foreach ($events as $e)
                     <tr>
                         <td>{{ $e->title }}</td>
-                        <td>{{ $e->description }}</td>
+                        <td>{{ $e->detail }}</td>
                         <td>
-                            <p class="control has-addons">
-                                <a class="button">Edit</a>
-                                <a class="button">
-                                    <span class="icon is-small">
-                                        <i class="fa fa-arrows"></i>
-                                    </span>
-                                </a>
-                                <a class="button is-danger">
-                                    <span class="icon is-small">
-                                        <i class="fa fa-close"></i>
-                                    </span>
-                                </a>
-                            </p>
+                            <form
+                                action="{{ route('events.destroy', ['event' => $e->id]) }}"
+                                method="post"
+                            >
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <p class="control has-addons is-hover-visible">
+                                    <a href="{{ route('events.edit', ['event' => $e->id]) }}" class="button">Edit</a>
+                                    <button class="button" type="submit">Remove</button>
+                                </p>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

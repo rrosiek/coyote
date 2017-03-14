@@ -393,9 +393,15 @@ export default {
         let calendar = this.$el.querySelector('.calendar')
 
         if (this.value) {
-            let parsed = this.value.split('-')
+            // Format input can be YYYY-MM-DD or M/D/YYYY
+            if (this.value.includes('-')) {
+                let parsed = this.value.split(' ')[0].split('-')
+                this.selectedDate = new Date(parsed[0], parsed[1] - 1, parsed[2])
+            } else {
+                let parsed = this.value.split('/')
+                this.selectedDate = new Date(parsed[2], parsed[0] - 1, parsed[1])
+            }
 
-            this.selectedDate = new Date(parsed[0], parsed[1] - 1, parsed[2])
             this.currentMonth = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), 1).getTime()
         }
 

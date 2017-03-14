@@ -14,6 +14,25 @@ label.is-required:after
   content: " *"
   color: $danger
 
+input[type=checkbox]
+  display: none
+
+input[type=checkbox] + label:before
+  font-family: FontAwesome
+  display: inline-block
+
+input[type=checkbox] + label:before 
+  content: "\f096"
+
+input[type=checkbox] + label:before
+  letter-spacing: 8px
+
+input[type=checkbox]:checked + label:before
+  content: "\f046"
+
+input[type=checkbox]:checked + label:before
+  letter-spacing: 6px
+
 .is-styled
   font-family: 'IM Fell English SC', serif
 
@@ -68,6 +87,12 @@ label.is-required:after
   padding: 1rem
   position: fixed
   right: 1rem
+
+.is-hover-visible
+  opacity: .3
+
+  &:hover
+    opacity: 1
 
 .datepicker
   position: relative

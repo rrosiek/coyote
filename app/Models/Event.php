@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -18,6 +19,7 @@ class Event extends Model
         'by_day',
         'by_set_pos',
         'all_day',
+        'until',
     ];
 
     /**
@@ -26,17 +28,38 @@ class Event extends Model
     protected $dates = [
         'start_date',
         'end_date',
+        'until',
         'created_at',
         'updated_at',
     ];
 
     /**
-     * @var array
+     * We still want to store in UTC, but site frontend based on America/New_York
+     *
+     * @param  string $date
      */
-    protected $casts = [
-        'start_date' => 'date',
-        'end_date' => 'date',
-        'interval' => 'integer',
-        'all_day' => 'boolean',
-    ];
+    // public function setEndDateAttribute($date)
+    // {
+        // $this->attributes['end_date'] = (new Carbon($date, 'America/New_York'))->timezone('UTC');
+    // }
+
+    /**
+     * We still want to store in UTC, but site frontend based on America/New_York
+     *
+     * @param  string $date
+     */
+    // public function setStartDateAttribute($date)
+    // {
+        // $this->attributes['start_date'] = (new Carbon($date, 'America/New_York'))->timezone('UTC');
+    // }
+
+    /**
+     * We still want to store in UTC, but site frontend based on America/New_York
+     *
+     * @param  string $date
+     */
+    // public function setUntilAttribute($date)
+    // {
+        // $this->attributes['until'] = (new Carbon($date, 'America/New_York'))->timezone('UTC');
+    // }
 }
