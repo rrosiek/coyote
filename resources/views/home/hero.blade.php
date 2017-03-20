@@ -12,13 +12,13 @@
                 </div>
             </div>
             <div class="columns">
-                <div class="column is-4">
+                <div class="column">
                     <h2 class="is-styled">Friendship</h2>
                 </div>
-                <div class="column is-4">
+                <div class="column">
                     <h2 class="is-styled">Justice</h2>
                 </div>
-                <div class="column is-4">
+                <div class="column">
                     <h2 class="is-styled">Learning</h2>
                 </div>
             </div>
@@ -27,6 +27,11 @@
     <div class="hero-footer">
         <div class="container has-text-centered">
             @include('home.events')
+            <div class="columns">
+                <div class="column">
+                    <a class="button is-primary" href="{{ route('events.list') }}">Other Events</a>
+                </div>
+            </div>
             <div>
                 <i class="icon is-medium fa fa-angle-down"></i>
             </div>

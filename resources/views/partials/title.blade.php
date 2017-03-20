@@ -11,19 +11,4 @@
             @endif
         </div>
     </div>
-    @if(isset($subnav))
-        <div class="hero-footer">
-            <div class="container is-fluid">
-                <nav class="tabs is-boxed">
-                    <ul>
-                        @foreach($subnav as $nav)
-                            <li>
-                                <a href="{{ $nav['link'] }}">{{ $nav['label'] }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    @endif
 </section>

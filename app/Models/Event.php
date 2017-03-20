@@ -34,32 +34,16 @@ class Event extends Model
     ];
 
     /**
-     * We still want to store in UTC, but site frontend based on America/New_York
-     *
-     * @param  string $date
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    // public function setEndDateAttribute($date)
-    // {
-        // $this->attributes['end_date'] = (new Carbon($date, 'America/New_York'))->timezone('UTC');
-    // }
+    public function scopeActive($query)
+    {
+        $start = new Carbon();
 
-    /**
-     * We still want to store in UTC, but site frontend based on America/New_York
-     *
-     * @param  string $date
-     */
-    // public function setStartDateAttribute($date)
-    // {
-        // $this->attributes['start_date'] = (new Carbon($date, 'America/New_York'))->timezone('UTC');
-    // }
-
-    /**
-     * We still want to store in UTC, but site frontend based on America/New_York
-     *
-     * @param  string $date
-     */
-    // public function setUntilAttribute($date)
-    // {
-        // $this->attributes['until'] = (new Carbon($date, 'America/New_York'))->timezone('UTC');
-    // }
+        return $query->where('until', '>=', $start)
+            ->orWhere(function ($sub) use ($start) {
+                $sub->where('start_date', '>=', $start)->whereNull('until');
+            });
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Event as Model;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use RRule\RRule;
 
 class Event extends Controller
 {
@@ -16,15 +17,49 @@ class Event extends Controller
     public function index(Request $request)
     {
         $title = 'Events';
-        $subtitle = 'Members';
-        $events = Model::paginate(10);
+        $events = Model::orderBy('start_date')->paginate(10);
 
-        if (Route::currentRouteName() === 'events.index')
-            return view('members.events.index', compact('title', 'subtitle', 'events'));
+        return view('admin.events.index', compact('title', 'events'));
+    }
+
+    /**
+     * Returns events calculated by RRule
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request $request)
+    {
+        $title = 'Events';
+        $count = $request->limit ?: 10;
+
+        $events = Model::active()
+            ->paginate(10)
+            ->flatMap(function ($e) {
+                return array_map(function ($rule) use ($e) {
+                    return [
+                        'title' => $e->title,
+                        'detail' => $e->detail,
+                        'start' => new Carbon($rule->format('Y-m-d H:i:s')),
+                        'end' => $e->end_date ? (new Carbon($e->end_date))->diffForHumans(new Carbon($e->start_date), true) : null,
+                        'allDay' => $e->all_day,
+                    ];
+                }, (new RRule([
+                    'DTSTART' => $e->start_date,
+                    'UNTIL' => $e->until ? $e->until->toDateString() : null,
+                    'COUNT' => $e->until ? null : 1,
+                    'FREQ' => $e->frequency ?: 'YEARLY',
+                    'INTERVAL' => $e->interval,
+                    'BYDAY' => $e->by_day,
+                    'BYSETPOS' => $e->by_set_pos,
+                ]))->getOccurrences());
+            })
+            ->sortBy('start')
+            ->take($count);
 
         return view('events', compact('title', 'events'));
     }
-
+ 
     /**
      * @return \Illuminate\Http\Response
      */
@@ -33,9 +68,8 @@ class Event extends Controller
         $event = new Model(['start_date' => Carbon::now()]);
         $end_time = $event->end_date ? $event->end_date->format('H:m') : '';
 
-        return view('members.events.create', [
+        return view('admin.events.create', [
             'title' => 'New Event',
-            'subtitle' => 'Members',
             'event' => $event,
             'start_time' => $event->start_date->hour . ':' . $event->start_date->minute,
             'end_time' => $end_time,
@@ -63,9 +97,8 @@ class Event extends Controller
     {
         $end_time = $event->end_date ? $event->end_date->format('H:i') : '';
 
-        return view('members.events.edit', [
+        return view('admin.events.edit', [
             'title' => 'Modify Event',
-            'subtitle' => 'Members',
             'event' => $event,
             'start_time' => $event->start_date->format('H:i'),
             'end_time' => $end_time,

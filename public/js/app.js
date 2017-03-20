@@ -2334,11 +2334,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var calendar = this.$el.querySelector('.calendar');
 
         if (this.value) {
-            console.log(this.value);
             // Format input can be YYYY-MM-DD or M/D/YYYY
             if (this.value.includes('-')) {
                 var parsed = this.value.split(' ')[0].split('-');
-                console.log(parsed);
                 this.selectedDate = new Date(parsed[0], parsed[1] - 1, parsed[2]);
             } else {
                 var _parsed = this.value.split('/');

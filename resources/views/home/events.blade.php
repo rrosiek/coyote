@@ -12,8 +12,3 @@
         <h5><strong>November 8th, 2017</strong></h5>
     </div>
 </div>
-<div class="columns">
-    <div class="column">
-        <a href="events" class="button is-primary">Event Details</a>
-    </div>
-</div>

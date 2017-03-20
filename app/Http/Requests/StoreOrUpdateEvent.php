@@ -13,7 +13,7 @@ class StoreOrUpdateEvent extends Request
             'detail' => ['max:255'],
             'start_date' => ['required', 'date_format:n/j/Y'],
             'start_time' => ['max:5'],
-            'end_date' => ['nullable', 'date_format:n/j/Y'],
+            'end_date' => ['nullable', 'date_format:n/j/Y', 'after:start_date'],
             'end_time' => ['max:5'],
             'frequency' => ['nullable', 'in:DAILY,WEEKLY,MONTHLY'],
             'by_day' => ['nullable', 'in:' . implode(",", array_keys(config('custom.days')))],
