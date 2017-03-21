@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use RRule\RRule;
 
 class Event extends Model
 {
@@ -34,16 +35,41 @@ class Event extends Model
     ];
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * Gets full list of events using RRule
+     *
+     * @param  integer $limit
+     * @return \Illuminate\Support\Collection
      */
-    public function scopeActive($query)
+    public static function list($limit = 10)
     {
         $start = new Carbon();
+        $events = new static();
 
-        return $query->where('until', '>=', $start)
+        return $events->where('until', '>=', $start)
             ->orWhere(function ($sub) use ($start) {
                 $sub->where('start_date', '>=', $start)->whereNull('until');
-            });
+            })
+            ->get()
+            ->flatMap(function ($e) {
+                return array_map(function ($rule) use ($e) {
+                    return [
+                        'title' => $e->title,
+                        'detail' => $e->detail,
+                        'start' => new Carbon($rule->format('Y-m-d H:i:s')),
+                        'end' => $e->end_date ? (new Carbon($e->end_date))->diffForHumans(new Carbon($e->start_date), true) : null,
+                        'allDay' => $e->all_day,
+                    ];
+                }, (new RRule([
+                    'DTSTART' => $e->start_date,
+                    'UNTIL' => $e->until ? $e->until->toDateString() : null,
+                    'COUNT' => $e->until ? null : 1,
+                    'FREQ' => $e->frequency ?: 'YEARLY',
+                    'INTERVAL' => $e->interval,
+                    'BYDAY' => $e->by_day,
+                    'BYSETPOS' => $e->by_set_pos,
+                ]))->getOccurrences());
+            })
+            ->sortBy('start')
+            ->take($limit);
     }
 }

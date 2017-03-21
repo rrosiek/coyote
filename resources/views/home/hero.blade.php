@@ -26,7 +26,18 @@
     </div>
     <div class="hero-footer">
         <div class="container has-text-centered">
-            @include('home.events')
+            <div class="columns">
+                @foreach ($events as $e)
+                    <div class="column">
+                        <h4 class="is-styled">{{ $e['title'] }}</h4>
+                        @if ($e['allDay'])
+                            <h5><strong>{{ $e['start']->format('F jS') }}</strong></h5>
+                        @else
+                            <h5><strong>{{ $e['start']->format('F jS, g:ia') }}</strong> for {{ $e['end'] }}</h5>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
             <div class="columns">
                 <div class="column">
                     <a class="button is-primary" href="{{ route('events.list') }}">Other Events</a>

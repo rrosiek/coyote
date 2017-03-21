@@ -11,8 +11,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 
-Route::get('events', 'Event@list')->name('events.list');
+Route::get('events', function () {
+    $title = 'Events';
+    $events = \App\Models\Event::list();
+
+    return view('events', compact('title', 'events'));
+})->name('events.list');
 
 Route::get('/', function () {
-    return view('home.main');
+    $events = \App\Models\Event::list(3);
+
+    return view('home.main', compact('events'));
 })->name('home');

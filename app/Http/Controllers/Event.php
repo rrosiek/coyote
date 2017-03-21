@@ -6,7 +6,6 @@ use App\Models\Event as Model;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use RRule\RRule;
 
 class Event extends Controller
 {
@@ -22,44 +21,6 @@ class Event extends Controller
         return view('admin.events.index', compact('title', 'events'));
     }
 
-    /**
-     * Returns events calculated by RRule
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function list(Request $request)
-    {
-        $title = 'Events';
-        $count = $request->limit ?: 10;
-
-        $events = Model::active()
-            ->paginate(10)
-            ->flatMap(function ($e) {
-                return array_map(function ($rule) use ($e) {
-                    return [
-                        'title' => $e->title,
-                        'detail' => $e->detail,
-                        'start' => new Carbon($rule->format('Y-m-d H:i:s')),
-                        'end' => $e->end_date ? (new Carbon($e->end_date))->diffForHumans(new Carbon($e->start_date), true) : null,
-                        'allDay' => $e->all_day,
-                    ];
-                }, (new RRule([
-                    'DTSTART' => $e->start_date,
-                    'UNTIL' => $e->until ? $e->until->toDateString() : null,
-                    'COUNT' => $e->until ? null : 1,
-                    'FREQ' => $e->frequency ?: 'YEARLY',
-                    'INTERVAL' => $e->interval,
-                    'BYDAY' => $e->by_day,
-                    'BYSETPOS' => $e->by_set_pos,
-                ]))->getOccurrences());
-            })
-            ->sortBy('start')
-            ->take($count);
-
-        return view('events', compact('title', 'events'));
-    }
- 
     /**
      * @return \Illuminate\Http\Response
      */
