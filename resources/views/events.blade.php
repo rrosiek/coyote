@@ -7,6 +7,9 @@
 
 <section class="section">
     <div class="container">
+        @if ($events->count() === 0)
+            <h1 class="title">No events scheduled at this time.</h1>
+        @endif
         @foreach ($events as $e)
             <div class="tile is-ancestor">
                 <div class="tile is-parent is-3">

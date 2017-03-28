@@ -2,7 +2,7 @@
 
 @section('admin.body')
 
-<section class="section">
+<section>
     <div class="container is-fluid">
         <form action="{{ route('events.update',  ['events' => $event->id]) }}" method="post">
             {{ method_field('PUT') }}

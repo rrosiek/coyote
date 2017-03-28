@@ -3,10 +3,10 @@
 Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('events', 'Event', ['except' => ['show']]);
-    Route::resource('pages', 'Page', ['except' => ['destroy', 'show']]);
+    Route::resource('home-pages', 'HomePage', ['except' => ['create', 'destroy']]);
 
     Route::get('/', function () {
-        return redirect()->route('pages.index');
+        return redirect()->route('home-pages.index');
     });
 
 });
@@ -20,6 +20,7 @@ Route::get('events', function () {
 
 Route::get('/', function () {
     $events = \App\Models\Event::list(3);
+    $sections = \App\Models\HomePage::all()->keyBy('slug');
 
-    return view('home.main', compact('events'));
+    return view('home.main', compact('events', 'sections'));
 })->name('home');

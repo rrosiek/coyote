@@ -6,13 +6,16 @@
     @endif
 
     @if ($errors->has($name))
-        <p class="control">
-            <datepicker input-class="input is-danger" name="{{ $name }}" value="{{ old($name, $value) }}"></datepicker>
+        <p class="control has-icon has-icon-right">
+            <textarea class="textarea is-danger" name="{{ $name }}">{!! old($name, $value) !!}</textarea>
+            <span class="icon is-small">
+                <i class="fa fa-warning"></i>
+            </span>
             <span class="help is-danger">{{ $errors->first($name) }}</span>
         </p>
     @else
         <p class="control">
-            <datepicker input-class="input" name="{{ $name }}" value="{{ old($name, $value) }}"></datepicker>
+            <textarea class="textarea" name="{{ $name }}">{!! old($name, $value) !!}</textarea>
         </p>
     @endif
 </div>

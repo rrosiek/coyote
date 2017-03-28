@@ -2,7 +2,7 @@
 
 @section('admin.body')
 
-<section class="section">
+<section>
     <div class="container is-fluid">
         <form action="{{ route('events.store') }}" method="post">
             {{ csrf_field() }}

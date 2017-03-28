@@ -8,20 +8,24 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Details</th>
+                <th>Slug</th>
+                <th>Updated By</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($pages as $p)
             <tr>
-                <td></td>
-                <td></td>
+                <td>{{ $p->title }}</td>
+                <td>{{ $p->slug }}</td>
+                <td>{{ $p->updated_by }}</td>
                 <td>
                     <p class="control has-addons is-hover-visible">
-                        <a href="" class="button">Edit</a>
+                        <a href="{{ route('home-pages.edit', ['homePage' => $p->id]) }}" class="button">Edit</a>
                     </p>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

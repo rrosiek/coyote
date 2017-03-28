@@ -7,7 +7,7 @@
 
 <div class="tabs is-centered">
     <ul>
-        <li><a href="{{ route('pages.index') }}">Pages</a></li>
+        <li><a href="{{ route('home-pages.index') }}">Home Pages</a></li>
         <li><a href="{{ route('events.index') }}">Events</a></li>
         <li><a>Users</a></li>
         <li><a>Correspondence</a></li>
@@ -16,6 +16,6 @@
 
 @yield('admin.body')
 
-@include('home.footer')
+@include('partials.footer')
 
 @endsection

@@ -3,10 +3,10 @@
 @section('body')
 
     @include('home.hero')
-    @include('home.aboutus')
-    @include('home.brothers')
-    @include('home.philanthropy')
-    @include('home.pledging')
+    @include('home.aboutus', ['data' => $sections['about-us']])
+    @include('home.brothers', ['data' => $sections['brothers']])
+    @include('home.philanthropy', ['data' => $sections['philanthropy']])
+    @include('home.pledging', ['data' => $sections['pledging']])
     @include('home.footer')
 
     <a class="to-top" v-scroll-to="{ id: 'home' }">
