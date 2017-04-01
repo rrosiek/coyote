@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateHomePage;
 use App\Models\HomePage as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class HomePage extends Controller
 {
@@ -24,7 +26,7 @@ class HomePage extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Implement new pages at a later time
     }
 
     /**
@@ -45,12 +47,31 @@ class HomePage extends Controller
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateHomePage $request
+     * @param  \App\Models\HomePage $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateHomePage $request, Model $homePage)
     {
-        //
+        $homePage->fill($request->all());
+
+        if ($request->image) {
+            $img = Image::make($request->image->path());
+            $path = sprintf('/images/%s.%s', $homePage->slug, $request->image->extension());
+
+            $img->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $img->save(storage_path('/app/public' . $path));
+            $homePage->image_public_path = sprintf('/storage' . $path);
+        }
+
+        $homePage->save();
+
+        return redirect()
+            ->route('home-pages.edit', ['page' => $homePage->id])
+            ->with('successMsg', sprintf('Page %s image has been successfully updated.', $homePage->title));
     }
 }

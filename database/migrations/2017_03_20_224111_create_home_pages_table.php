@@ -16,7 +16,7 @@ class CreateHomePagesTable extends Migration
         Schema::create('home_pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->index();
             $table->text('snippet');
             $table->text('detail');
             $table->string('image_public_path');

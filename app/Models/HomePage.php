@@ -9,8 +9,6 @@ class HomePage extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
-        'slug',
         'snippet',
         'detail',
     ];

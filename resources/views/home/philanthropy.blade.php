@@ -4,7 +4,8 @@
             <div class="columns">
                 <div class="column">
                     <h1 class="title is-styled">{{ $data['title'] }}</h1>
-                    <p class="content">{{ $data['snippet'] }}</p>
+                    {!! $data['snippet'] !!}
+                    <br>
                     <div>
                         <a href="/philanthropy" class="button is-dark is-outlined">Read More</a>
                     </div>

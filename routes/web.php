@@ -24,3 +24,15 @@ Route::get('/', function () {
 
     return view('home.main', compact('events', 'sections'));
 })->name('home');
+
+Route::get('/{wildcard}', function ($wildcard) {
+    $page = \App\Models\HomePage::where('slug', $wildcard)->first();
+
+    if ($page) {
+        $title = $page->title;
+        
+        return view('page', compact('title', 'page'));
+    } else {
+        return redirect('/');
+    }
+})->where(['wildcard' => '.*']);
