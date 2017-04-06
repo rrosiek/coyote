@@ -20,11 +20,11 @@ Route::get('events', function () {
 
 Route::get('login', 'Auth\Login@showLoginForm')->name('login');
 Route::post('login', 'Auth\Login@login');
-Route::get('login/facebook', 'Auth\Login@redirectToFacebook');
+Route::get('login/facebook', 'Auth\Login@redirectToFacebook')->name('login.facebook');
 Route::get('login/facebook/callback', 'Auth\Login@handleFacebookCallback');
-Route::get('login/google', 'Auth\Login@redirectToGoogle');
+Route::get('login/google', 'Auth\Login@redirectToGoogle')->name('login.google');
 Route::get('login/google/callback', 'Auth\Login@handleGoogleCallback');
-Route::post('logout', 'Auth\Login@logout')->name('logout');
+Route::get('logout', 'Auth\Login@logout')->name('logout');
 Route::get('password/reset', 'Auth\ForgotPassword@showLinkRequestForm')->name('password.request');
 Route::get('register', 'Auth\Register@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\Register@register');

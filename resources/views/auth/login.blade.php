@@ -10,7 +10,7 @@
         @include('partials.notify')
         <div class="columns">
             <div class="column is-3 is-offset-3">
-                <a class="button is-medium is-fullwidth is-facebook">
+                <a href="{{ route('login.facebook') }}" class="button is-medium is-fullwidth is-facebook">
                     <span class="icon">
                         <i class="fa fa-facebook"></i>
                     </span>
@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="column is-3">
-                <a class="button is-medium is-fullwidth is-google">
+                <a href="{{ route('login.google') }}" class="button is-medium is-fullwidth is-google">
                     <span class="icon">
                         <i class="fa fa-google"></i>
                     </span>

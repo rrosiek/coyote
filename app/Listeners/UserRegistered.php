@@ -32,7 +32,7 @@ class UserRegistered implements ShouldQueue
         Mail::to(env('MAIL_WEBADMIN'))->send(new ActivateNewUser($event->user));
 
         $response = $this->client->request('GET', env('GEOCODE_URL'), [
-            'query' => ['address' => $event->user->fullAddress]
+            'query' => ['address' => $event->user->fullAddress, 'key' => env('GOOGLE_KEY')]
         ]);
 
         $geoData = json_decode($response->getBody());

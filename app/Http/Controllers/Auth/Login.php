@@ -2,8 +2,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class Login extends Controller
@@ -67,7 +68,7 @@ class Login extends Controller
      * @param  \Laravel\Socialite\Two\User
      * @return \Illuminate\Http\Response
      */
-    private function handleSocialCallbak($user)
+    private function handleSocialCallback($user)
     {
         $existingUser = User::where('email', $user->getEmail())->first();
 
@@ -76,6 +77,8 @@ class Login extends Controller
 
             return redirect()->route('register', ['oauthSuccess' => true]);
         }
+
+        Auth::login($existingUser, true);
 
         return redirect()->intended($this->redirectPath());
     }
