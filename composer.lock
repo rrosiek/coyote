@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "38ea92aec340cd06a2c50e6d4417ebe1",
+    "content-hash": "a3ee3e962bb329362fdc1ed459971bc0",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.25.3",
+            "version": "3.25.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c5d85fbaaea30e598eab4ff07c4213787b00b080"
+                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c5d85fbaaea30e598eab4ff07c4213787b00b080",
-                "reference": "c5d85fbaaea30e598eab4ff07c4213787b00b080",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f5181b893c8822c5dc3986e4e52eddff66bbd04f",
+                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-04T20:52:10+00:00"
+            "time": "2017-04-05T23:01:19+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

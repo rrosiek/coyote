@@ -38,6 +38,14 @@ class User extends Authenticatable
     /**
      * @return string
      */
+    public function getFullAddressAttribute()
+    {
+        return $this->address1 . ' ' . $this->city . ', ' . $this->state . ' ' . $this->zip;
+    }
+
+    /**
+     * @return string
+     */
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;

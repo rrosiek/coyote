@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('grad_year')->nullable();
             $table->string('roll_number')->nullable();
             $table->string('employer')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
+            $table->float('latitude', 10, 7)->nullable();
+            $table->float('longitude', 10, 7)->nullable();
             $table->boolean('active')->default(false);
             $table->boolean('subscribed')->default(true);
             $table->string('activate_token')->index()->nullable();

@@ -106,7 +106,7 @@ class Register extends Controller
         $user->active = true;
         $user->save();
 
-        Mail::to($user->email)->send(new NewUserActivated($user));
+        Mail::to($user->email)->queue(new NewUserActivated($user));
 
         return view('auth.activated', compact('title', 'user'));
     }
