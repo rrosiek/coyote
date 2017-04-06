@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\NewUserActivated;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -93,6 +95,19 @@ class Register extends Controller
      */
     public function activate($token)
     {
-        return 'activate';
+        $title = 'Activate User';
+        $user = User::where([
+            ['activate_token', $token],
+            ['active', false],
+        ])->first();
+
+        if (!$user) return redirect('/');
+
+        $user->active = true;
+        $user->save();
+
+        Mail::to($user->email)->send(new NewUserActivated($user));
+
+        return view('auth.activated', compact('title', 'user'));
     }
 }

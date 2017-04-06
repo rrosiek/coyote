@@ -32,7 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('longitude')->nullable();
             $table->boolean('active')->default(false);
             $table->boolean('subscribed')->default(true);
-            $table->string('activate_token')->nullable();
+            $table->string('activate_token')->index()->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
