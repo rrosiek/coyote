@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +12,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email',
+        'password',
+        'first_name',
+        'last_name',
+        'address1',
+        'address2',
+        'city',
+        'state',
+        'zip',
+        'phone',
+        'grad_year',
+        'roll_number',
+        'employer',
+        'subscribed',
     ];
 
     /**
@@ -22,4 +34,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

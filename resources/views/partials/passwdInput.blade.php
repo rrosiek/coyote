@@ -1,6 +1,6 @@
 <div class="field">
     @if (isset($required))
-        <label class="label required">{{ $label }}</label>
+        <label class="label is-required">{{ $label }}</label>
     @else
         <label class="label">{{ $label }}</label>
     @endif

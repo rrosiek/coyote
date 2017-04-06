@@ -1,20 +1,12 @@
 <div class="field">
-    @if (isset($required))
-        <label class="label is-required">{{ $label }}</label>
-    @else
-        <label class="label">{{ $label }}</label>
-    @endif
+    <label class="label {{ isset($required) ? 'is-required' : '' }}">{{ $label }}</label>
 
     @if ($errors->has($name))
         <p class="control has-icon has-icon-right">
             <span class="select is-danger">
                 <select name="{{ $name }}">
                     @foreach ($values as $opt => $text)
-                        @if ($opt == old($name, $value))
-                            <option value="{{ $opt }}" selected>{{ $text }}</option>
-                        @else
-                            <option value="{{ $opt }}">{{ $text }}</option>
-                        @endif
+                        <option value="{{ $opt }}" {{ $opt == old($name, $value) ? 'selected' : '' }}>{{ $text }}</option>
                     @endforeach
                 </select>
             </span>
@@ -25,11 +17,7 @@
             <span class="select">
                 <select name="{{ $name }}">
                     @foreach ($values as $opt => $text)
-                        @if ($opt == old($name, $value))
-                            <option value="{{ $opt }}" selected>{{ $text }}</option>
-                        @else
-                            <option value="{{ $opt }}">{{ $text }}</option>
-                        @endif
+                        <option value="{{ $opt }}" {{ $opt == old($name, $value) ? 'selected' : '' }}>{{ $text }}</option>
                     @endforeach
                 </select>
             </span>

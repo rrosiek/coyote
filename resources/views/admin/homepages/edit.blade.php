@@ -4,8 +4,8 @@
 
 <div class="container is-fluid">
     @include('partials.notify')
-    <h5 class="title is-5">Primary Image</h5>
-    <form action="{{ route('home-pages.update',  ['homePage' => $homePage->id]) }}" method="post" enctype="multipart/form-data">
+    <h4 class="title is-4">Primary Image</h4>
+    <form action="{{ route('home-pages.update', [$homePage]) }}" method="post" enctype="multipart/form-data">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
         <div class="columns">
@@ -27,7 +27,10 @@
             </div>
         </div>
     </form>
-    <h5 class="title is-5">Content</h5>
+    
+    <br>
+    
+    <h4 class="title is-4">Content</h4>
     <p class="content">The snippet content is the message on the home page and the details content is what will appear on the actual page when <em>Read More</em> is clicked.</p>
     <form action="{{ route('home-pages.update',  ['homePage' => $homePage->id]) }}" method="post">
         {{ method_field('PUT') }}

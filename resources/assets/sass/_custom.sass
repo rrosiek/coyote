@@ -18,20 +18,21 @@ input[type=checkbox]
   display: none
 
 input[type=checkbox] + label:before
-  font-family: FontAwesome
   display: inline-block
+  font-family: FontAwesome
+  font-size: 1.5rem
 
 input[type=checkbox] + label:before 
   content: "\f096"
 
 input[type=checkbox] + label:before
-  letter-spacing: 8px
+  letter-spacing: .7rem
 
 input[type=checkbox]:checked + label:before
   content: "\f046"
 
 input[type=checkbox]:checked + label:before
-  letter-spacing: 6px
+  letter-spacing: .5rem
 
 .is-styled
   font-family: 'IM Fell English SC', serif
@@ -39,7 +40,15 @@ input[type=checkbox]:checked + label:before
 .content.is-light
   color: $grey-lighter
 
-.content.is-light > a:link
+.content.is-light a:link
+  color: $white
+
+.button.is-facebook
+  background-color: $facebook
+  color: $white
+ 
+.button.is-google
+  background-color: $google
   color: $white
 
 #aboutus p

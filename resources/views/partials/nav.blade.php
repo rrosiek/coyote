@@ -27,7 +27,6 @@
             </a>
         @else
             <a class="nav-item" href="/">HOME</a>
-            <a class="nav-item" href="/">PAYMENTS</a>
         @endif
         @if (Auth::check())
             <a class="nav-item" href="/">PROFILE</a>
@@ -38,6 +37,7 @@
         @else
             <a class="nav-item" href="/members">MEMBERS</a>
         @endif
+        <a class="nav-item" href="/">PAYMENTS</a>
         <a href="https://www.facebook.com/groups/71074270336/" class="nav-item">
             <span class="icon">
                 <i class="fa fa-facebook"></i>
