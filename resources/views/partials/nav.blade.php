@@ -28,16 +28,11 @@
         @else
             <a class="nav-item" href="/">HOME</a>
         @endif
-        @if (Auth::check())
-            <a class="nav-item" href="/">PROFILE</a>
-            <a class="nav-item" href="/">DIRECTORY</a>
-            @if (Auth::user()->is_admin)
-                <a class="nav-item" href="/admin">ADMIN</a>
-            @endif
-        @else
-            <a class="nav-item" href="/members">MEMBERS</a>
+        <a class="nav-item" href="/members">MEMBERS</a>
+        <a class="nav-item" href="{{ route('payments') }}">PAYMENTS</a>
+        @if (Auth::check() and Auth::user()->is_admin)
+            <a class="nav-item" href="/admin">ADMIN</a>
         @endif
-        <a class="nav-item" href="/">PAYMENTS</a>
         <a href="https://www.facebook.com/groups/71074270336/" class="nav-item">
             <span class="icon">
                 <i class="fa fa-facebook"></i>

@@ -7,7 +7,8 @@ import isLoading from './directives/isLoading'
 import notifyClose from './directives/notifyClose'
 import scrollTo from './directives/scrollTo'
 import datepicker from './components/datepicker'
-import confirm from './components/confirm'
+// import confirm from './components/confirm'
+import payment from './components/payment'
 
 axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
@@ -36,7 +37,8 @@ Vue.directive('isLoading', isLoading)
 Vue.directive('notifyClose', notifyClose)
 Vue.directive('scrollTo', scrollTo)
 Vue.component('datepicker', datepicker)
-Vue.component('confirm', confirm)
+Vue.component('payment', payment)
+// Vue.component('confirm', confirm)
 
 new Vue({
     el: '#app'

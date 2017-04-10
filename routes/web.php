@@ -18,6 +18,9 @@ Route::get('events', function () {
     return view('events', compact('title', 'events'));
 })->name('events.list');
 
+Route::get('payments', 'Payment@create')->name('payments');
+Route::post('payments', 'Payment@store');
+
 Route::get('login', 'Auth\Login@showLoginForm')->name('login');
 Route::post('login', 'Auth\Login@login');
 Route::get('login/facebook', 'Auth\Login@redirectToFacebook')->name('login.facebook');

@@ -415,6 +415,7 @@ export default {
             if (this.$el && !this.$el.contains(e.target)) this.close()
         }, false)
     },
+    name: 'DatePicker',
     props: {
         id: {
             type: String
