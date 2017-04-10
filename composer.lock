@@ -557,16 +557,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.17",
+            "version": "v5.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f7675d59e3863a58ecdff1a5ee1dcd0cff788f4b"
+                "reference": "d15ded55b5e690199393ea93a57edcbae20d1ffc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f7675d59e3863a58ecdff1a5ee1dcd0cff788f4b",
-                "reference": "f7675d59e3863a58ecdff1a5ee1dcd0cff788f4b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d15ded55b5e690199393ea93a57edcbae20d1ffc",
+                "reference": "d15ded55b5e690199393ea93a57edcbae20d1ffc",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-04-03T13:07:39+00:00"
+            "time": "2017-04-10T19:27:41+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -1569,16 +1569,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v4.6.0",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "603aaf76008206d9889d32c49fee30977aae1cd4"
+                "reference": "54a10a3731398c5e56b3bf8f03df88b26b1a2b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/603aaf76008206d9889d32c49fee30977aae1cd4",
-                "reference": "603aaf76008206d9889d32c49fee30977aae1cd4",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/54a10a3731398c5e56b3bf8f03df88b26b1a2b51",
+                "reference": "54a10a3731398c5e56b3bf8f03df88b26b1a2b51",
                 "shasum": ""
             },
             "require": {
@@ -1620,7 +1620,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2017-04-06T21:28:25+00:00"
+            "time": "2017-04-10T16:53:09+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

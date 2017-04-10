@@ -2529,6 +2529,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 var emailValidate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -2564,18 +2571,25 @@ var emailValidate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
             this.stripe.createToken(this.card, {
                 name: this.name,
-                address_zip: this.zip
+                address_zip: this.zip,
+                currency: 'usd'
             }).then(function (result) {
                 if (result.token) {
-                    _this.$http.post('/payment', {
-                        name: _this.name,
+                    _this.$http.post('/payments', {
+                        brand: result.token.card.brand,
                         email: _this.email,
-                        zip: _this.zip,
-                        token: result.token.id
+                        lastFour: result.token.card.last4,
+                        name: _this.name,
+                        product: _this.productLabel,
+                        token: result.token.id,
+                        payment: _this.cents,
+                        zip: _this.zip
                     }).then(function (resp) {
-                        return _this.$emit('stripePaid');
+                        _this.$emit('stripePaid');
+                        _this.loading = false;
                     }).catch(function (error) {
-                        return _this.inError = true;
+                        _this.inError = true;
+                        _this.loading = false;
                     });
                 } else if (result.error) {
                     _this.inError = true;
@@ -3327,10 +3341,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "control"
   }, [_c('button', {
     staticClass: "button is-medium is-primary is-fullwidth",
+    class: {
+      'is-loading': _vm.loading
+    },
     attrs: {
+      "disabled": _vm.loading,
       "type": "submit"
     }
-  }, [_vm._v("Pay $" + _vm._s(_vm.cents / 100))])])])])])
+  }, [_vm._v("\n                    Pay $" + _vm._s(_vm.cents / 100) + "\n                ")])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "field"

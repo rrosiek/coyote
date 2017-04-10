@@ -26,7 +26,14 @@
             <br>
             <div class="field">
                 <p class="control">
-                    <button class="button is-medium is-primary is-fullwidth" type="submit">Pay ${{ cents / 100 }}</button>
+                    <button
+                        :class="{ 'is-loading': loading }"
+                        class="button is-medium is-primary is-fullwidth"
+                        :disabled="loading"
+                        type="submit"
+                    >
+                        Pay ${{ cents / 100 }}
+                    </button>
                 </p>
             </div>
         </form>
@@ -74,7 +81,7 @@ export default {
                 currency: 'usd'
             }).then(result => {
                 if (result.token) {
-                    this.$http.post('/payment', {
+                    this.$http.post('/payments', {
                         brand: result.token.card.brand,
                         email: this.email,
                         lastFour: result.token.card.last4,
@@ -84,8 +91,14 @@ export default {
                         payment: this.cents,
                         zip: this.zip
                     })
-                    .then(resp => this.$emit('stripePaid'))
-                    .catch(error => this.inError = true)
+                    .then(resp => {
+                        this.$emit('stripePaid')
+                        this.loading = false
+                    })
+                    .catch(error => {
+                        this.inError = true
+                        this.loading = false
+                    })
                 } else if (result.error) {
                     this.inError = true
                     this.cardErrorText = result.error.message;

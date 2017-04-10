@@ -1,9 +1,7 @@
 <?php
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class StorePayment extends FormRequest
+class StorePayment extends Request
 {
     /**
      * @return array

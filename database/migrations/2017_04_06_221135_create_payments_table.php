@@ -13,6 +13,18 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('email')->index();
+            $table->string('name');
+            $table->string('zip');
+            $table->string('product');
+            $table->integer('amount');
+            $table->string('cc_brand');
+            $table->string('cc_lastfour');
+            $table->string('token');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +34,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('payments');
     }
 }

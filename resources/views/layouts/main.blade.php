@@ -19,8 +19,7 @@
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="theme-color" content="#ffffff">
 
-        <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}</script>
-        <script>window.Laravel = {!! json_encode(['stripeKey' => env('STRIPE_KEY')]) !!}</script>
+        <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(), 'stripeKey' => env('STRIPE_KEY')]) !!}</script>
     </head>
 
     <body>
