@@ -9,9 +9,9 @@
     <div class="container">
         @include('partials.notify')
 
-        @if (isset($oauthSuccess))
+        @if (session()->has('oauthSuccess'))
             <div class="notification is-info">
-                You have successfully logged in with a social provider, but you still need to register and verify your membership with the site.
+                You have successfully logged in with a social account, but you still need to register and verify your membership with the site using the same email registered with the social provider.  If you are already registered and need to update your email address, please contact {{ env('MAIL_WEBADMIN')}}.
             </div>
         @endif
         <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">

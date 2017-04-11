@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -30,6 +31,18 @@ class Login extends Controller
     public function showLoginForm()
     {
         return view('auth.login', ['title' => 'Login', 'subtitle' => 'Members']);
+    }
+
+    /**
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $creds = $request->only($this->username(), 'password');
+        $creds['active'] = true;
+
+        return $creds;
     }
 
     /**
@@ -70,13 +83,13 @@ class Login extends Controller
      */
     private function handleSocialCallback($user)
     {
-        $existingUser = User::where('email', $user->getEmail())->first();
+        $existingUser = User::where([
+            ['email', $user->getEmail()],
+            ['active', true],
+        ])->first();
 
-        if (!$existingUser) {
-            $this->logout();
-
-            return redirect()->route('register', ['oauthSuccess' => true]);
-        }
+        if (!$existingUser)
+            return redirect()->route('register')->with('oauthSuccess', true);
 
         Auth::login($existingUser, true);
 

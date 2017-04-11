@@ -1,14 +1,23 @@
 <?php
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
     Route::resource('events', 'Event', ['except' => ['show']]);
     Route::resource('home-pages', 'HomePage', ['except' => ['create', 'destroy']]);
 
     Route::get('/', function () {
         return redirect()->route('home-pages.index');
-    });
+    })->name('admin');
 
+});
+
+Route::group(['prefix' => 'members', 'middleware' => ['auth']], function () {
+
+    Route::resource('users', 'User', ['except' => ['create', 'destroy', 'store']]);
+
+    Route::get('/', function () {
+        return redirect()->route('users.show', ['user' => Auth::id()]);
+    })->name('members');
 });
 
 Route::get('events', function () {

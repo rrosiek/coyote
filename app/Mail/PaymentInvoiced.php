@@ -31,6 +31,6 @@ class PaymentInvoiced extends Mailable
      */
     public function build()
     {
-        return $this->subject('Invoice for ' . $payment->product)->markdown('emails.payments.invoice');
+        return $this->subject('Invoice for ' . $this->payment->product)->markdown('emails.payments.invoice');
     }
 }

@@ -28,7 +28,7 @@
         @else
             <a class="nav-item" href="/">HOME</a>
         @endif
-        <a class="nav-item" href="/members">MEMBERS</a>
+        <a class="nav-item" href="{{ route('members') }}">MEMBERS</a>
         <a class="nav-item" href="{{ route('payments') }}">PAYMENTS</a>
         @if (Auth::check() and Auth::user()->is_admin)
             <a class="nav-item" href="/admin">ADMIN</a>
