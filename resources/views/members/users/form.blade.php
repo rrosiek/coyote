@@ -5,14 +5,6 @@
         @include('partials.textInput', ['name' => 'email', 'label' => 'E-Mail', 'value' => $user->email, 'required' => true])
     </div>
 </div>
-<div class="columns">
-    <div class="column is-one-third">
-        @include('partials.passwdInput', ['name' => 'password', 'label' => 'Password', 'required' => true])
-    </div>
-    <div class="column is-one-third">
-        @include('partials.passwdInput', ['name' => 'password_confirmation', 'label' => 'Confirm Password', 'required' => true])
-    </div>
-</div>
 
 <br>
 

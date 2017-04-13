@@ -16,8 +16,9 @@ Route::group(['prefix' => 'members', 'middleware' => ['auth']], function () {
     Route::resource('users', 'User', ['except' => ['create', 'destroy', 'store']]);
 
     Route::get('/', function () {
-        return redirect()->route('users.show', ['user' => Auth::id()]);
+        return redirect()->route('users.edit', ['user' => Auth::id()]);
     })->name('members');
+
 });
 
 Route::get('events', function () {
@@ -37,7 +38,10 @@ Route::get('login/facebook/callback', 'Auth\Login@handleFacebookCallback');
 Route::get('login/google', 'Auth\Login@redirectToGoogle')->name('login.google');
 Route::get('login/google/callback', 'Auth\Login@handleGoogleCallback');
 Route::get('logout', 'Auth\Login@logout')->name('logout');
+Route::post('password/email', 'Auth\ForgotPassword@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset', 'Auth\ForgotPassword@showLinkRequestForm')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPassword@reset');
+Route::get('password/reset/{token}', 'Auth\ResetPassword@showResetForm')->name('password.reset');
 Route::get('register', 'Auth\Register@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\Register@register');
 Route::get('register/activate/{token}', 'Auth\Register@activate')->name('register.activate');

@@ -1,4 +1,4 @@
-<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey={{ env('TINYMCE_KEY') }}"></script>
 <script>
     tinymce.init({
         selector: 'textarea',
