@@ -59,3 +59,11 @@
         @include('partials.checkboxInput', ['name' => 'subscribed', 'label' => 'Subscribe to alumni e-mails from this site', 'value' => $user->subscribed])
     </div>
 </div>
+
+@if (Auth::user()->is_admin)
+    <div class="columns">
+        <div class="column">
+            @include('partials.checkboxInput', ['name' => 'is_admin', 'label' => 'Administrator: grants all site admin capabilities', 'value' => $user->is_admin])
+        </div>
+    </div>
+@endif

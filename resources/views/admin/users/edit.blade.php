@@ -1,16 +1,14 @@
-@extends('members.main')
+@extends('admin.main')
 
-@section('members.body')
+@section('admin.body')
 
 <section>
     <div class="container">
-        @include('partials.notify')
-
         <form action="{{ route('users.update', [$user]) }}" method="post">
             {{ method_field('PUT') }}
             {{ csrf_field() }}
 
-            @include('members.users.form')
+            @include('members.profiles.form')
 
             <br>
 

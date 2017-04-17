@@ -5,31 +5,27 @@ use App\Http\Requests\UpdateUser;
 use App\Models\User as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class User extends Controller
 {
     /**
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin', ['only' => 'index']);
-    }
-
-    /**
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-    }
+        $title = 'Users';
+        $users = (new Model)->query();
 
-    /**
-     * @param  \App\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Model $user)
-    {
+        if ($request->has('filter')) {
+            $users->where('first_name', 'like', '%' . $request->filter . '%')
+                ->orWhere('last_name', 'like', '%' . $request->filter . '%')
+                ->orWhere('email', 'like', '%' . $request->filter . '%');
+        }
+
+        $users = $users->paginate(20);
+
+        return view('admin.users.index', compact('title', 'users'));
     }
 
     /**
@@ -38,13 +34,10 @@ class User extends Controller
      */
     public function edit(Model $user)
     {
-        if (Gate::denies('update-user', $user, Auth::user()))
-            return redirect('/');
-
         $title = $user->name;
-        $subtitle = 'Update Profile';
+        $subtitle = 'Update User';
 
-        return view('members.users.edit', compact('title', 'subtitle', 'user'));
+        return view('admin.users.edit', compact('title', 'subtitle', 'user'));
     }
 
     /**
@@ -54,13 +47,11 @@ class User extends Controller
      */
     public function update(UpdateUser $request, Model $user)
     {
-        if (Gate::denies('update-user', $user, Auth::user()))
-            return redirect('/');
-        
         $user->fill($request->all());
         $user->subscribed = $request->has('subscribed');
+        $user->is_admin = $request->has('is_admin');
         $user->save();
 
-        return redirect()->route('users.edit', [$user])->with('successMsg', 'User info has been updated');
+        return redirect()->route('users.index', [$user])->with('successMsg', 'User info has been updated');
     }
 }

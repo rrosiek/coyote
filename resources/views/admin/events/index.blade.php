@@ -37,7 +37,7 @@
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <p class="control has-addons is-hover-visible">
-                                <a href="{{ route('events.edit', ['event' => $e->id]) }}" class="button">Edit</a>
+                                <a href="{{ route('events.edit', [$e]) }}" class="button">Edit</a>
                                 <button class="button" type="submit">Remove</button>
                             </p>
                         </form>

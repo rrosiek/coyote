@@ -4,6 +4,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
     Route::resource('events', 'Event', ['except' => ['show']]);
     Route::resource('home-pages', 'HomePage', ['except' => ['create', 'destroy']]);
+    Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
 
     Route::get('/', function () {
         return redirect()->route('home-pages.index');
@@ -13,10 +14,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
 Route::group(['prefix' => 'members', 'middleware' => ['auth']], function () {
 
-    Route::resource('users', 'User', ['except' => ['create', 'destroy', 'store']]);
+    Route::resource('profiles', 'Profile', ['except' => ['create', 'destroy', 'store']]);
 
     Route::get('/', function () {
-        return redirect()->route('users.edit', ['user' => Auth::id()]);
+        return redirect()->route('profiles.edit', ['user' => Auth::id()]);
     })->name('members');
 
 });
