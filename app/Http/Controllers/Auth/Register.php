@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -85,6 +86,11 @@ class Register extends Controller
         
         $this->validator($request->all())->validate();
         event(new Registered($this->create($request->all())));
+
+        // Clean up session in case user came in via social provider
+        Auth::logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
 
         return redirect()->route('login')->with('successMsg', $msg);
     }

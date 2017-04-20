@@ -31,13 +31,13 @@
                     <td>{{ $e->frequency }}</td>
                     <td>
                         <form
-                            action="{{ route('events.destroy', ['event' => $e->id]) }}"
+                            action="{{ route('events.destroy', $e) }}"
                             method="post"
                         >
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <p class="control has-addons is-hover-visible">
-                                <a href="{{ route('events.edit', [$e]) }}" class="button">Edit</a>
+                                <a href="{{ route('events.edit', $e) }}" class="button">Edit</a>
                                 <button class="button" type="submit">Remove</button>
                             </p>
                         </form>

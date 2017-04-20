@@ -31,16 +31,20 @@
     <br>
     
     <h4 class="title is-4">Content</h4>
-    <p class="content">The snippet content is the message on the home page and the details content is what will appear on the actual page when <em>Read More</em> is clicked.</p>
-    <form action="{{ route('home-pages.update',  ['homePage' => $homePage->id]) }}" method="post">
-        {{ method_field('PUT') }}
-        {{ csrf_field() }}
+    <div class="columns">
+        <div class="column is-10">
+            <p class="content">The snippet content is the message on the home page and the details content is what will appear on the actual page when <em>Read More</em> is clicked.</p>
+            <form action="{{ route('home-pages.update',  ['homePage' => $homePage->id]) }}" method="post">
+                {{ method_field('PUT') }}
+                {{ csrf_field() }}
 
-        @include('partials.textareaInput', ['name' => 'snippet', 'label' => 'Snippet', 'value' => $homePage->snippet, 'required' => true])
-        @include('partials.textareaInput', ['name' => 'detail', 'label' => 'Details', 'value' => $homePage->detail, 'required' => true])
+                @include('partials.textareaInput', ['name' => 'snippet', 'label' => 'Snippet', 'value' => $homePage->snippet, 'required' => true])
+                @include('partials.textareaInput', ['name' => 'detail', 'label' => 'Details', 'value' => $homePage->detail, 'required' => true])
 
-        <button class="button is-medium is-primary" type="submit" v-is-loading="">SAVE</button>
-    </form>
+                <button class="button is-medium is-primary" type="submit" v-is-loading="">SAVE</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 @endsection

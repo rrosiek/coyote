@@ -4,7 +4,7 @@
 
 <section>
     <div class="container">
-        <form action="{{ route('users.update', [$user]) }}" method="post">
+        <form action="{{ route('users.update', $user) }}" method="post">
             {{ method_field('PUT') }}
             {{ csrf_field() }}
 

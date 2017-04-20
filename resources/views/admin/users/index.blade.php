@@ -71,7 +71,7 @@
                     </td>
                     <td>
                         <p class="control has-addons is-hover-visible">
-                            <a href="{{ route('users.edit', [$u]) }}" class="button">Edit</a>
+                            <a href="{{ route('users.edit', $u) }}" class="button">Edit</a>
                         </p>
                     </td>
                 </tr>

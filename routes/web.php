@@ -6,6 +6,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('home-pages', 'HomePage', ['except' => ['create', 'destroy']]);
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
 
+    Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy']]);
+    Route::post('correspondence/preview', 'Correspondence@preview');
+
     Route::get('/', function () {
         return redirect()->route('home-pages.index');
     })->name('admin');

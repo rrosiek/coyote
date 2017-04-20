@@ -10,7 +10,7 @@
         <li><a href="{{ route('home-pages.index') }}">Home Pages</a></li>
         <li><a href="{{ route('events.index') }}">Events</a></li>
         <li><a href="{{ route('users.index') }}">Users</a></li>
-        <li><a>Correspondence</a></li>
+        <li><a href="{{ route('correspondence.index') }}">Correspondence</a></li>
     </ul>
 </div>
 

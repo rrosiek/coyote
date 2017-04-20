@@ -6,7 +6,7 @@
     <div class="container">
         @include('partials.notify')
 
-        <form action="{{ route('profiles.update', [$profile]) }}" method="post">
+        <form action="{{ route('profiles.update', $profile) }}" method="post">
             {{ method_field('PUT') }}
             {{ csrf_field() }}
 
