@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Sigma Chi Iota Zeta :: {{ $title or '' }}</title>
+        <title>Sigma Chi Iota Zeta :: {{ $title or 'Friendship, Justice, and Learning' }}</title>
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=IM+Fell+English+SC:400" rel="stylesheet" type="text/css">

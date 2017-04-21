@@ -56,35 +56,68 @@ class Correspondence extends Controller
     }
 
     /**
-     * @param  \App\Http\Requests\StoreOrUpdateEvent $request
-     * @param  \App\Models\Event $event
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        // From Mailgun request:
-
-        // private function verify($apiKey, $token, $timestamp, $signature)
-        // {
-            //check if the timestamp is fresh
-            // if (abs(time() - $timestamp) > 15) {
-            //     return false;
-            // }
-
-            //returns true if signature is valid
-            // return hash_hmac('sha256', $timestamp.$token, $apiKey) === $signature;
-        // }
-
-        // disable failed emails
-        // update correspondence row
-    }
-
-    /**
      * @param  \App\Http\Requests\StoreCorrespondence $request
      * @return \Illuminate\Http\Response
      */
     public function preview(StoreCorrespondence $request)
     {
         //
+    }
+
+    /**
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function handleMailHook(Request $request)
+    {
+        if (!$this->verifyMailHook($request->all()))
+            return response(null, 406);
+
+        $msg = Model::find($request->message_id);
+
+        if (!$msg) return response(null, 406);
+
+        if ($request->event === 'delivered') {
+            $msg->deliveries++;
+            $msg->save();
+        } elseif ($request->event === 'opened') {
+            $msg->opens++;
+            $msg->save();
+        } elseif ($request->event === 'dropped') {
+            $failures = json_decode($msg->failures);
+            array_push($failures, $request->only(
+                'recipient',
+                    'domain',
+                    'reason',
+                    'code',
+                    'description',
+                    'timestamp'
+            ));
+            $msg->failures = json_encode($failures);
+            $msg->save();
+
+            $user = User::where('email', $request->recipient)->first();
+            $user->subscribed = false;
+            $user->email_failed = $request->description;
+            $user->save();
+        } else {
+            return response(null, 406);
+        }
+
+        return response(null, 200);
+    }
+
+    /**
+     * @param  array $params
+     * @return bool
+     */
+    private function verifyMailHook($params)
+    {
+        extract($params);
+
+        if (abs(time() - $timestamp) > 15)
+            return false;
+
+        return hash_hmac('sha256', $timestamp . $token, env('MAIL_SECRET')) === $signature;
     }
 }

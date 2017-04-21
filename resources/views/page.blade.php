@@ -7,7 +7,9 @@
 
 <section class="section">
     <div class="container">
-        {!! $page->detail !!}
+        <div class="content">
+            {!! $page->detail !!}
+        </div>
     </div>
 </section>
 

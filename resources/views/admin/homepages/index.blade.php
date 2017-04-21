@@ -4,6 +4,9 @@
 
 <div class="container is-fluid">
     @include('partials.notify')
+    <p class="content">
+        These pages are special in that they have and "intro" piece that displays on the main page of the site.  The categories are static along with the URLs; only content can be updated.
+    </p>
     <table class="table">
         <thead>
             <tr>

@@ -9,7 +9,7 @@
             'insertdatetime table contextmenu paste'
         ],
         toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link',
-        content_css: ['/css/app.css'],
+        // content_css: ['/css/app.css'],
         image_prepend_url: '{{ url("storage/images") }}/',
         @if (isset($images))
             image_list: [

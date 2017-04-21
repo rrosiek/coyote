@@ -6,7 +6,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('home-pages', 'HomePage', ['except' => ['create', 'destroy']]);
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
 
-    Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy']]);
+    Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
     Route::post('correspondence/preview', 'Correspondence@preview');
 
     Route::get('/', function () {
@@ -34,6 +34,8 @@ Route::get('events', function () {
 
 Route::get('payments', 'Payment@create')->name('payments');
 Route::post('payments', 'Payment@store');
+
+Route::post('correspondence/hook', 'Correspondence@handleMailHook');
 
 Route::get('login', 'Auth\Login@showLoginForm')->name('login');
 Route::post('login', 'Auth\Login@login');

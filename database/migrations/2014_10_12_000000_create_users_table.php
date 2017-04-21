@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->boolean('subscribed')->default(true);
             $table->string('activate_token')->index()->nullable();
             $table->boolean('is_admin')->default(false);
+            $table->text('email_failed')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
