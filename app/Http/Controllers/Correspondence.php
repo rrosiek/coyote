@@ -3,9 +3,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCorrespondence;
 use App\Jobs\ProcessCorrespondence;
+use App\Mail\PreviewCorrespondence;
 use App\Models\Correspondence as Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class Correspondence extends Controller
 {
@@ -44,6 +46,15 @@ class Correspondence extends Controller
      */
     public function store(StoreCorrespondence $request)
     {
+        if ($request->has('preview')) {
+            Mail::to(Auth::user()->email)
+                ->queue(new PreviewCorrespondence($request->only('subject', 'body')));
+
+            return back()
+                ->withInput()
+                ->with('successMsg', 'You should receive a preview copy of the email at your address shortly.');
+        }
+
         $msg = new Model($request->only('subject', 'body'));
         $msg->author()->associate(Auth::user());
         $msg->save();
@@ -53,15 +64,6 @@ class Correspondence extends Controller
         return redirect()
             ->route('correspondence.index')
             ->with('successMsg', 'Message has been queued successfully.  Refresh this page to view the delivery stats');
-    }
-
-    /**
-     * @param  \App\Http\Requests\StoreCorrespondence $request
-     * @return \Illuminate\Http\Response
-     */
-    public function preview(StoreCorrespondence $request)
-    {
-        //
     }
 
     /**

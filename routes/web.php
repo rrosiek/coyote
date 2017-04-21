@@ -7,7 +7,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
 
     Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
-    Route::post('correspondence/preview', 'Correspondence@preview');
 
     Route::get('/', function () {
         return redirect()->route('home-pages.index');
