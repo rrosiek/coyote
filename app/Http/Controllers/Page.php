@@ -107,7 +107,7 @@ class Page extends Controller
      * @param  \App\Models\Page $page
      * @return void
      */
-    private function updateSnippetImage(Request $request, Page $page)
+    private function updateSnippetImage(Request $request, Model $page)
     {
         $img = Image::make($request->image->path());
         $path = sprintf('/images/%s.%s', $page->slug, $request->image->extension());
