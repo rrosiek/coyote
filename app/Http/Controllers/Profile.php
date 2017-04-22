@@ -17,6 +17,7 @@ class Profile extends Controller
         $subtitle = 'Members';
         // $users = Model::orderBy('last_name')->paginate(20);
 
+        return view('members.profiles.index', compact('title', 'subtitle'));
         // return view('members.profiles.index', compact('title', 'users'));
     }
 

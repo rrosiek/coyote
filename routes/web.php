@@ -19,7 +19,7 @@ Route::group(['prefix' => 'members', 'middleware' => ['auth']], function () {
     Route::resource('profiles', 'Profile', ['except' => ['create', 'destroy', 'store']]);
 
     Route::get('/', function () {
-        return redirect()->route('profiles.edit', ['user' => Auth::id()]);
+        return redirect()->route('profiles.edit', Auth::user());
     })->name('members');
 
 });

@@ -7,8 +7,8 @@
 
 <div class="tabs is-centered">
     <ul>
-        <li><a>Profile</a></li>
-        <li><a>Find Brothers</a></li>
+        <li><a href="{{ route('profiles.edit', Auth::user()) }}">Profile</a></li>
+        <li><a href="{{ route('profiles.index') }}">Find Brothers</a></li>
     </ul>
 </div>
 
