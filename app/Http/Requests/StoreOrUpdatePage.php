@@ -11,7 +11,7 @@ class StoreOrUpdatePage extends Request
         return [
             'image' => ['sometimes', 'image'],
             'title' => ['sometimes', 'required', 'max:255'],
-            'slug' => ['sometimes', 'required', 'alpha_dash', 'max:255'],
+            'slug' => ['sometimes', 'required', 'alpha_dash', 'unique:pages', 'max:255'],
             'snippet' => ['sometimes', 'required'],
             'detail' => ['sometimes', 'required'],
         ];
