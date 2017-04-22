@@ -75,8 +75,8 @@ class Page extends Controller
             $page->slug = $request->slug;
         }
 
-        $page->snippet = $request->snippet;
-        $page->detail = $request->detail;
+        if ($request->snippet) $page->snippet = $request->snippet;
+        if ($request->detail) $page->detail = $request->detail;
         $page->updatedBy()->associate(Auth::user());
 
         if ($request->image) $this->updateSnippetImage($request, $page);
