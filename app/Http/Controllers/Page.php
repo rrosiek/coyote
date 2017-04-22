@@ -76,6 +76,7 @@ class Page extends Controller
 
         $page->snippet = $request->snippet;
         $page->detail = $request->detail;
+        $page->updatedBy()->associate(Auth::user());
 
         if ($request->image) $this->updateSnippetImage($request, $page);
 
