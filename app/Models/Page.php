@@ -20,6 +20,6 @@ class Page extends Model
      */
     public function updatedBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }
