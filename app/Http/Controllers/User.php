@@ -47,11 +47,13 @@ class User extends Controller
      */
     public function update(UpdateUser $request, Model $user)
     {
+        // TODO: see if address was updated -> geocode
+
         $user->fill($request->all());
         $user->subscribed = $request->has('subscribed');
         $user->is_admin = $request->has('is_admin');
         $user->save();
 
-        return redirect()->route('users.index', [$user])->with('successMsg', 'User info has been updated');
+        return redirect()->route('users.index', $user)->with('successMsg', 'User info has been updated');
     }
 }

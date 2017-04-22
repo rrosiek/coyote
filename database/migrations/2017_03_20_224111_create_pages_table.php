@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomePagesTable extends Migration
+class CreatePagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateHomePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_pages', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('slug')->index();
-            $table->text('snippet');
+            $table->text('snippet')->nullable();
             $table->text('detail');
-            $table->string('image_public_path');
+            $table->string('image_public_path')->nullable();
+            $table->boolean('home_page')->default(false);
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
 

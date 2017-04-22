@@ -7,7 +7,7 @@
 
 <div class="tabs is-centered">
     <ul>
-        <li><a href="{{ route('home-pages.index') }}">Home Pages</a></li>
+        <li><a href="{{ route('pages.index') }}">Pages</a></li>
         <li><a href="{{ route('events.index') }}">Events</a></li>
         <li><a href="{{ route('users.index') }}">Users</a></li>
         <li><a href="{{ route('correspondence.index') }}">Correspondence</a></li>

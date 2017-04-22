@@ -50,6 +50,8 @@ class Profile extends Controller
      */
     public function update(UpdateUser $request, Model $profile)
     {
+        // TODO: see if address was updated -> geocode
+
         if ($profile->id !== Auth::id())
             return redirect('/');
         
@@ -57,6 +59,6 @@ class Profile extends Controller
         $profile->subscribed = $request->has('subscribed');
         $profile->save();
 
-        return redirect()->route('profiles.edit', [$profile])->with('successMsg', 'Profile information has been updated');
+        return redirect()->route('profiles.edit', $profile)->with('successMsg', 'Profile information has been updated');
     }
 }

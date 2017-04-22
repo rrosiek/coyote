@@ -3,12 +3,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HomePage extends Model
+class Page extends Model
 {
      /**
      * @var array
      */
     protected $fillable = [
+        'title',
+        'slug',
         'snippet',
         'detail',
     ];

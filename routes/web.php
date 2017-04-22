@@ -3,13 +3,13 @@
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
     Route::resource('events', 'Event', ['except' => ['show']]);
-    Route::resource('home-pages', 'HomePage', ['except' => ['create', 'destroy']]);
+    Route::resource('pages', 'Page');
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
 
     Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
 
     Route::get('/', function () {
-        return redirect()->route('home-pages.index');
+        return redirect()->route('pages.index');
     })->name('admin');
 
 });
@@ -53,13 +53,13 @@ Route::get('register/activate/{token}', 'Auth\Register@activate')->name('registe
 
 Route::get('/', function () {
     $events = \App\Models\Event::list(3);
-    $sections = \App\Models\HomePage::all()->keyBy('slug');
+    $sections = \App\Models\Page::where('home_page', true)->get()->keyBy('slug');
 
     return view('home.main', compact('events', 'sections'));
 })->name('home');
 
 Route::get('/{wildcard}', function ($wildcard) {
-    $page = \App\Models\HomePage::where('slug', $wildcard)->first();
+    $page = \App\Models\Page::where('slug', $wildcard)->first();
 
     if ($page) {
         $title = $page->title;
