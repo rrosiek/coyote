@@ -7,7 +7,7 @@
                     {!! $data['snippet'] !!}
                     <br>
                     <div>
-                        <a href="/philanthropy" class="button is-dark is-outlined">Read More</a>
+                        <a href="/{{ $data['slug'] }}" class="button is-dark is-outlined">Read More</a>
                     </div>
                 </div>
                 <div class="column has-text-centered">

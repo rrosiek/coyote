@@ -12,7 +12,7 @@
                     {!! $data['snippet'] !!}
                     <br>
                     <div class="has-text-right">
-                        <a href="/brothers" class="button is-primary is-outlined">Read More</a>
+                        <a href="/{{ $data['slug'] }}" class="button is-primary is-outlined">Read More</a>
                     </div>
                 </div>
                 <div class="column has-text-centered is-hidden-desktop">
