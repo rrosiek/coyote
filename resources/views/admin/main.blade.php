@@ -11,6 +11,7 @@
         <li><a href="{{ route('events.index') }}">Events</a></li>
         <li><a href="{{ route('users.index') }}">Users</a></li>
         <li><a href="{{ route('correspondence.index') }}">Correspondence</a></li>
+        <li><a href="{{ route('logout') }}">Logout</a></li>
     </ul>
 </div>
 

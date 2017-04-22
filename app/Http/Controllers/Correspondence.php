@@ -120,6 +120,6 @@ class Correspondence extends Controller
         if (abs(time() - $timestamp) > 15)
             return false;
 
-        return hash_hmac('sha256', $timestamp . $token, env('MAIL_SECRET')) === $signature;
+        return hash_hmac('sha256', $timestamp . $token, env('MAILGUN_SECRET')) === $signature;
     }
 }

@@ -9,6 +9,7 @@
     <ul>
         <li><a href="{{ route('profiles.edit', Auth::user()) }}">Profile</a></li>
         <li><a href="{{ route('profiles.index') }}">Find Brothers</a></li>
+        <li><a href="{{ route('logout') }}">Logout</a></li>
     </ul>
 </div>
 
