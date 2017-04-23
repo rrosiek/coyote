@@ -7,9 +7,15 @@
 
 <div class="tabs is-centered">
     <ul>
-        <li><a href="{{ route('profiles.edit', Auth::user()) }}">Profile</a></li>
-        <li><a href="{{ route('profiles.index') }}">Find Brothers</a></li>
-        <li><a href="{{ route('logout') }}">Logout</a></li>
+        <li class="{{ starts_with(Route::currentRouteName(), 'profiles.edit') ? 'is-active' : '' }}">
+            <a href="{{ route('profiles.edit', Auth::user()) }}">Profile</a>
+        </li>
+        <li class="{{ starts_with(Route::currentRouteName(), 'profiles.index') ? 'is-active' : '' }}">
+            <a href="{{ route('profiles.index') }}">Find Brothers</a>
+        </li>
+        <li>
+            <a href="{{ route('logout') }}">Logout</a>
+        </li>
     </ul>
 </div>
 

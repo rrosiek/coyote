@@ -1,6 +1,6 @@
-@extends('admin.main')
+@extends('members.main')
 
-@section('admin.body')
+@section('members.body')
 
     <div class="container">
         @include('partials.notify')
