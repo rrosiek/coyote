@@ -63,6 +63,11 @@
 @if (Auth::user()->is_admin)
     <div class="columns">
         <div class="column">
+            @include('partials.checkboxInput', ['name' => 'lifetime_member', 'label' => 'User has purchased a lifetime membership', 'value' => $user->lifetime_member])
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
             @include('partials.checkboxInput', ['name' => 'is_admin', 'label' => 'Administrator: grants all site admin capabilities', 'value' => $user->is_admin])
         </div>
     </div>

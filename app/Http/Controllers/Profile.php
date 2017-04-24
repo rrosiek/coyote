@@ -51,13 +51,12 @@ class Profile extends Controller
      */
     public function update(UpdateUser $request, Model $profile)
     {
-        // TODO: see if address was updated -> geocode
-
         if ($profile->id !== Auth::id())
             return redirect('/');
         
         $profile->fill($request->all());
         $profile->subscribed = $request->has('subscribed');
+        $profile->lifetime_member = $request->has('lifetime_member');
         $profile->save();
 
         return redirect()->route('profiles.edit', $profile)->with('successMsg', 'Profile information has been updated');
