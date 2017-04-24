@@ -63,7 +63,7 @@
                         </p>
                     </div>
                     <div class="field">
-                        <button class="button is-medium is-primary is-fullwidth" type="submit">Login</button>
+                        <button class="button is-medium is-primary is-fullwidth" type="submit" v-is-loading="">Login</button>
                     </div>
                 </form>
             </div>

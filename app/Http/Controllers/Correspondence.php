@@ -115,11 +115,13 @@ class Correspondence extends Controller
      */
     private function verifyMailHook($params)
     {
-        extract($params);
-
-        if (abs(time() - $timestamp) > 15)
+        if (abs(time() - $params['timestamp']) > 15)
             return false;
 
-        return hash_hmac('sha256', $timestamp . $token, env('MAILGUN_SECRET')) === $signature;
+        return hash_hmac(
+            'sha256',
+            $params['timestamp'] . $params['token'],
+            env('MAILGUN_SECRET')
+        ) === $params['signature'];
     }
 }
