@@ -53,10 +53,15 @@ class Profile extends Controller
     {
         if ($profile->id !== Auth::id())
             return redirect('/');
-        
+
+        // Reset failed email messages if address has changed
+        if ($profile->email !== $request->email)
+            $profile->email_failed = null;
+
         $profile->fill($request->all());
         $profile->subscribed = $request->has('subscribed');
         $profile->lifetime_member = $request->has('lifetime_member');
+
         $profile->save();
 
         return redirect()->route('profiles.edit', $profile)->with('successMsg', 'Profile information has been updated');
