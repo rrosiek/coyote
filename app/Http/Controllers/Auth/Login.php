@@ -46,6 +46,27 @@ class Login extends Controller
     }
 
     /**
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        // The old system used a poor password hash, so the passwords have been nullified during the migration.
+        // If a user wants to login with local auth, they need to reset their password first.
+        $user = User::where('email', $request->get($this->username()))->first();
+
+        if ($user and $user->password == '0') {
+            return redirect()
+                ->route('password.request')
+                ->with('errorMsg', 'For security purposes, your password needs to be reset.');
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([$this->username() => trans('auth.failed')]);
+    }
+
+    /**
      * @return \Illuminate\Http\Response
      */
     public function redirectToFacebook()

@@ -9,6 +9,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-half is-offset-3">
+                @include('partials.notify')
                 @if (session('status'))
                     <div class="notification is-info">
                         {{ session('status') }}
