@@ -47,10 +47,13 @@ class User extends Controller
      */
     public function update(UpdateUser $request, Model $user)
     {
-        // TODO: see if address was updated -> geocode
+        // Reset failed email messages if address has changed
+        if ($user->email !== $request->email)
+            $user->email_failed = null;
 
         $user->fill($request->all());
         $user->subscribed = $request->has('subscribed');
+        $user->lifetime_member = $request->has('lifetime_member');
         $user->is_admin = $request->has('is_admin');
         $user->save();
 

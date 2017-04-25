@@ -61,6 +61,7 @@ class Profile extends Controller
         $profile->fill($request->all());
         $profile->subscribed = $request->has('subscribed');
         $profile->lifetime_member = $request->has('lifetime_member');
+        $profile->is_admin = $request->has('is_admin');
 
         $profile->save();
 

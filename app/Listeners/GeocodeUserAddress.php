@@ -2,7 +2,6 @@
 namespace App\Listeners;
 
 use App\Events\UserSaving;
-use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,32 +12,15 @@ class GeocodeUserAddress implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * @var \GuzzleHttp\Client
-     */
-    private $client;
-
-    /**
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->client = new Client();
-    }
-
-    /**
      * @param  \App\Events\UserSaving  $event
      * @return void
      */
     public function handle(UserSaving $event)
     {
-        $current = User::find($event->user->id);
+        $coords = $this->getCoords($event->user->fullAddress);
 
-        if ($current->fullAddress !== $event->user->fullAddress) {
-            $coords = $this->getCoords($event->user->fullAddress);
-
-            $event->user->latitude = $coords['lat'];
-            $event->user->longitude = $coords['lng'];
-        }
+        $event->user->latitude = $coords['lat'];
+        $event->user->longitude = $coords['lng'];
     }
 
     /**
@@ -47,10 +29,11 @@ class GeocodeUserAddress implements ShouldQueue
      */
     private function getCoords($address)
     {
+        $client = new Client();
         $blank = ['lat' => 0, 'lng' => 0];
 
         try {
-            $response = $this->client->request('GET', env('GEOCODE_URL'), [
+            $response = $client->request('GET', env('GEOCODE_URL'), [
                 'query' => ['address' => $address, 'key' => env('GOOGLE_KEY')]
             ]);
         } catch (TransferException $e) {
