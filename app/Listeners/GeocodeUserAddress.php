@@ -2,15 +2,13 @@
 namespace App\Listeners;
 
 use App\Events\UserSaved;
+use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class GeocodeUserAddress implements ShouldQueue
 {
-    use InteractsWithQueue;
-
     /**
      * @param  \App\Events\UserSaved  $event
      * @return void
@@ -19,9 +17,10 @@ class GeocodeUserAddress implements ShouldQueue
     {
         $coords = $this->getCoords($event->user->fullAddress);
 
-        $event->user->latitude = $coords['lat'];
-        $event->user->longitude = $coords['lng'];
-        $event->user->save();
+        User::where('id', $event->user->id)->update([
+            'latitude' => $coords['lat'],
+            'longitude' => $coords['lng'],
+        ]);
     }
 
     /**
