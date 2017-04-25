@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Events\UserSaving;
+use App\Events\UserSaved;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -42,7 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $events = [
-        'saving' => UserSaving::class,
+        'saving' => UserSaved::class,
     ];
 
     /**

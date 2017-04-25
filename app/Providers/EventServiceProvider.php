@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Registered' => [
             'App\Listeners\UserRegistered',
         ],
-        'App\Events\UserSaving' => [
+        'App\Events\UserSaved' => [
             'App\Listeners\GeocodeUserAddress',
         ]
     ];

@@ -1,7 +1,7 @@
 <?php
 namespace App\Listeners;
 
-use App\Events\UserSaving;
+use App\Events\UserSaved;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use Illuminate\Queue\InteractsWithQueue;
@@ -12,15 +12,16 @@ class GeocodeUserAddress implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * @param  \App\Events\UserSaving  $event
+     * @param  \App\Events\UserSaved  $event
      * @return void
      */
-    public function handle(UserSaving $event)
+    public function handle(UserSaved $event)
     {
         $coords = $this->getCoords($event->user->fullAddress);
 
         $event->user->latitude = $coords['lat'];
         $event->user->longitude = $coords['lng'];
+        $event->user->save();
     }
 
     /**
