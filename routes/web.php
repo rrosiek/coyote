@@ -5,7 +5,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('events', 'Event', ['except' => ['show']]);
     Route::resource('pages', 'Page');
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
-
     Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
 
     Route::get('/', function () {
@@ -35,6 +34,8 @@ Route::get('payments', 'Payment@create')->name('payments');
 Route::post('payments', 'Payment@store');
 
 Route::post('correspondence/hook', 'Correspondence@handleMailHook');
+
+Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
 
 Route::get('login', 'Auth\Login@showLoginForm')->name('login');
 Route::post('login', 'Auth\Login@login');
