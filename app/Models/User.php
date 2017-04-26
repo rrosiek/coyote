@@ -66,7 +66,10 @@ class User extends Authenticatable
      */
     public function getAvatarUrlAttribute()
     {
-        return '';
+        $root = 'https://www.gravatar.com/avatar/';
+        $hash = md5(strtolower(trim($this->email)));
+
+        return $root . $hash;
     }
 
     /**

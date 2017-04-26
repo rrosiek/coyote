@@ -5,6 +5,27 @@
         @include('partials.textInput', ['name' => 'email', 'label' => 'E-Mail', 'value' => $user->email, 'required' => true])
     </div>
 </div>
+<div class="columns">
+    <div class="column is-two-thirds">
+        <p class="content">
+            <strong>Avatar</strong>
+        </p>
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image">
+                        <img src="{{ $user->avatarUrl }}" alt="Avatar">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="content">
+                        Your avatar is pulled in from <a href="https://gravatar.com">gravatar.com</a> by your e-mail address, head there to create or update your image.  Gravatars are used by many internet services, allowing you to change it once for many locations.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
 
 <br>
 
