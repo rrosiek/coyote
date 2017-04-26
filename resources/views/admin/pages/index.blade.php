@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $p->title }}</td>
                 <td>{{ $p->slug }}</td>
-                <td>{{ $p->updated_by }}</td>
+                <td>{{ $p->updatedBy['name'] }}</td>
                 <td>
                     <form action="{{ route('pages.destroy', $p) }}" method="post">
                         <p class="control has-addons is-hover-visible">

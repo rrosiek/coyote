@@ -15,15 +15,9 @@ class User extends Controller
     public function index(Request $request)
     {
         $title = 'Users';
-        $users = (new Model)->query();
-
-        if ($request->has('filter')) {
-            $users->where('first_name', 'like', '%' . $request->filter . '%')
-                ->orWhere('last_name', 'like', '%' . $request->filter . '%')
-                ->orWhere('email', 'like', '%' . $request->filter . '%');
-        }
-
-        $users = $users->paginate(20);
+        $users = Model::filterBy($request->all())
+            ->orderBy('last_name')
+            ->paginate(20);
 
         return view('admin.users.index', compact('title', 'users'));
     }

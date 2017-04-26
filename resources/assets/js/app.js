@@ -33,6 +33,10 @@ Vue.component('datepicker', datepicker)
 Vue.component('payment', payment)
 
 new Vue({
+    data: {
+        mobileNav: false,
+        showModal: false
+    },
     el: '#app',
     methods: {
         slugify (text) {

@@ -60,4 +60,39 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    /**
+     * @return string
+     */
+    public function getAvatarUrlAttribute()
+    {
+        return '';
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param array $params
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilterBy($query, $params)
+    {
+        if (array_key_exists('filter', $params) and $params['filter']) {
+            $query->where(function ($sub) use ($params) {
+                $sub->where('first_name', 'like', '%' . $params['filter'] . '%')
+                    ->orWhere('last_name', 'like', '%' . $params['filter'] . '%')
+                    ->orWhere('email', 'like', '%' . $params['filter'] . '%');
+            });
+        }
+
+        if (array_key_exists('inactive', $params))
+            $query->where('active', false);
+
+        if (array_key_exists('unsubscribed', $params))
+            $query->where('subscribed', false);
+
+        if (array_key_exists('admin', $params))
+            $query->where('is_admin', true);
+
+        return $query;
+    }
 }

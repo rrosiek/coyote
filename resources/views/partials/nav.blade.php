@@ -5,13 +5,13 @@
         </a>
     </div>
 
-    <span class="nav-toggle">
+    <span @click="mobileNav = !mobileNav" :class="{ 'is-active': mobileNav }" class="nav-toggle">
         <span></span>
         <span></span>
         <span></span>
     </span>
 
-    <div class="nav-right nav-menu">
+    <div :class="{ 'is-active': mobileNav }" class="nav-right nav-menu">
         @if (Route::currentRouteName() === 'home')
             <a class="nav-item" v-scroll-to="{ id: 'aboutus' }">
                 ABOUT US

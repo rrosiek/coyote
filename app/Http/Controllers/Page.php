@@ -16,7 +16,7 @@ class Page extends Controller
     public function index()
     {
         $title = 'Pages';
-        $pages = Model::orderBy('slug')->paginate(20);
+        $pages = Model::with('updatedBy')->orderBy('slug')->paginate(20);
 
         return view('admin.pages.index', compact('title', 'pages'));
     }
