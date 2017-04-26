@@ -13,7 +13,7 @@
                     </p>
                 </div>
             </div>
-            @if (count(request()->all()) > 0)
+            @if (request()->except('page'))
                 <div class="level-item">
                     <span class="tag is-dark is-medium">
                         Clear All
@@ -22,7 +22,7 @@
                 </div>
 
                 @foreach (request()->all() as $f => $val)
-                    @if ($val)
+                    @if ($val and $f !== 'page')
                         <div class="level-item">
                             <span class="tag is-success is-medium">
                                 {{ $f === 'filter' ? $val : ucwords($f) }}
@@ -35,7 +35,7 @@
         </div>
         <div class="level-right">
             <div class="level-item">
-                @if (request('filter'))
+                @if (request()->except('page'))
                     {{ $users->appends(request()->all())->links() }}
                 @else
                     {{ $users->links() }}
