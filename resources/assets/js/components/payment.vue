@@ -1,7 +1,7 @@
 <template>
     <div class="column is-half is-offset-3">
         <transition name="slide-fade" mode="out-in">
-            <div v-if="current === 'payment'" key="payment">
+            <div v-if="current === 'payment'" :key="payment">
                 <div class="columns">
                     <div class="column is-half">
                         <button @click="current = 'dues'" class="button is-primary is-large is-fullwidth">Pay Dues</button>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="current === 'dues'" key="dues">
+            <div v-if="current === 'dues'" :key="dues">
                 <div class="level">
                     <div class="level-left">
                         <div class="level-item">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="current === 'donate'" key="donate">
+            <div v-if="current === 'donate'" :key="donate">
                 <div class="field has-addons">
                     <p class="control is-expanded has-icon">
                         <input
@@ -95,10 +95,10 @@
                     </p>
                 </div>
             </div>
-            <div v-if="current === 'pay'" key="pay">
+            <div v-if="current === 'pay'" :key="pay">
                 <stripe @stripePaid="current = 'paid'" :cents="payment" :product-label="productLabel"></stripe>
             </div>
-            <div class="notification is-success" v-if="current === 'paid'" key="paid">
+            <div class="notification is-success" v-if="current === 'paid'" :key="paid">
                 Thank you!  Your payment has been successfully submitted and you should receive a receipt by email shortly.
             </div>
         </transition>

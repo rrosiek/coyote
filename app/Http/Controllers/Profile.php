@@ -11,22 +11,37 @@ class Profile extends Controller
     /**
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Search';
         $subtitle = 'Members';
-        // $users = Model::orderBy('last_name')->paginate(20);
 
-        return view('members.profiles.index', compact('title', 'subtitle'));
-        // return view('members.profiles.index', compact('title', 'users'));
+        if ($request->expectsJson()) {
+            $profiles = Model::where('latitude', '<>', '0.0000000')
+                ->where('active', true)
+                ->get(['id', 'latitude', 'longitude']);
+
+            return response()->json($profiles, 200);
+        }
+
+        $profiles = Model::filterBy($request->all())
+            ->orderBy('last_name')
+            ->paginate(20);
+
+        return view('members.profiles.index', compact('title', 'subtitle', 'profiles'));
     }
 
     /**
+     * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Model $profile)
+    public function show(Request $request, Model $profile)
     {
+        if (!$profile->active)
+            return response(null, 404);
+
+        return response()->json($profile, 200);
     }
 
     /**

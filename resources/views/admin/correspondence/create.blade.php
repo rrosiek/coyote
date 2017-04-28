@@ -49,4 +49,6 @@
 
 @endsection
 
-@include('partials.tinymce')
+@section('scripts')
+    @include('partials.tinymce')
+@endsection

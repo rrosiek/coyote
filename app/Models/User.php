@@ -33,9 +33,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'active',
         'activate_token',
+        'email_failed',
+        'is_admin',
         'password',
         'remember_token',
+        'subscribed',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $appends = [
+        'avatar_url',
+        'full_address',
+        'name',
     ];
 
     /**
