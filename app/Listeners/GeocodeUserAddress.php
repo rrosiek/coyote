@@ -34,7 +34,7 @@ class GeocodeUserAddress implements ShouldQueue
 
         try {
             $response = $client->request('GET', env('GEOCODE_URL'), [
-                'query' => ['address' => $address, 'key' => env('GOOGLE_KEY')]
+                'query' => ['address' => $address, 'key' => env('GOOGLE_SERVER_KEY')]
             ]);
         } catch (TransferException $e) {
             return $blank;
