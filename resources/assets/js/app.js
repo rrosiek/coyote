@@ -2,6 +2,7 @@
 
 import Vue from 'vue'
 import axios from 'axios'
+import clipboard from './directives/clipboard'
 import isLoading from './directives/isLoading'
 import notifyClose from './directives/notifyClose'
 import scrollTo from './directives/scrollTo'
@@ -30,6 +31,7 @@ Object.defineProperties(Vue.prototype, {
     }
 })
 
+Vue.directive('clipboard', clipboard)
 Vue.directive('isLoading', isLoading)
 Vue.directive('notifyClose', notifyClose)
 Vue.directive('scrollTo', scrollTo)

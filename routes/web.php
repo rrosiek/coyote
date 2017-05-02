@@ -23,6 +23,15 @@ Route::group(['prefix' => 'members', 'middleware' => ['auth']], function () {
 
 });
 
+Route::get('admin/minutes/create', 'Minutes@create')->name('minutes.create')->middleware('admin');
+Route::delete('admin/minutes/{minutes}', 'Minutes@destroy')->name('minutes.destroy')->middleware('admin');
+Route::post('admin/minutes', 'Minutes@store')->name('minutes.store')->middleware('admin');
+Route::get('admin/minutes', 'Minutes@index')->name('minutes.admin')->middleware('admin');
+Route::get('members/minutes/{token}', 'Minutes@show')->name('minutes.show');
+Route::get('members/minutes', 'Minutes@index')->name('minutes.members')->middleware('auth');
+
+Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
+
 Route::get('events', function () {
     $title = 'Events';
     $events = \App\Models\Event::list();
@@ -34,8 +43,6 @@ Route::get('payments', 'Payment@create')->name('payments');
 Route::post('payments', 'Payment@store');
 
 Route::post('correspondence/hook', 'Correspondence@handleMailHook');
-
-Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
 
 Route::get('login', 'Auth\Login@showLoginForm')->name('login');
 Route::post('login', 'Auth\Login@login');

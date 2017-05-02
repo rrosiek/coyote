@@ -2,16 +2,14 @@
 
 @section('admin.body')
 
-<section>
-    <div class="container is-fluid">
-        <form action="{{ route('events.store') }}" method="post">
-            {{ csrf_field() }}
+<div class="container is-fluid">
+    <form action="{{ route('events.store') }}" method="post">
+        {{ csrf_field() }}
 
-            @include('admin.events.form')
+        @include('admin.events.form')
 
-            <button class="button is-medium is-primary" type="submit" v-is-loading="">SAVE</button>
-        </form>
-    </div>
-</section>
+        <button class="button is-medium is-primary" type="submit" v-is-loading="">SAVE</button>
+    </form>
+</div>
 
 @endsection

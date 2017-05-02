@@ -19,5 +19,8 @@
     "jsonp": "0.2.1",
     "laravel-mix": "0.10.0",
     "vue": "2.3.0"
+  },
+  "dependencies": {
+    "clipboard": "1.6.1"
   }
 }

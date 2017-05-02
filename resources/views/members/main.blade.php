@@ -13,6 +13,9 @@
         <li class="{{ starts_with(Route::currentRouteName(), 'profiles.index') ? 'is-active' : '' }}">
             <a href="{{ route('profiles.index') }}">Find Brothers</a>
         </li>
+        <li class="{{ starts_with(Route::currentRouteName(), 'minutes') ? 'is-active' : '' }}">
+            <a href="{{ route('minutes.members') }}">Minutes</a>
+        </li>
         <li class="{{ starts_with(Route::currentRouteName(), 'lifetime') ? 'is-active' : '' }}">
             <a href="{{ route('lifetime') }}">Lifetime</a>
         </li>

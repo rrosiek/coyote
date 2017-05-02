@@ -19,7 +19,7 @@
                 <div class="column is-6">
                     <div class="field">
                         <p class="control">
-                            <input name="image" type="file">
+                            <input class="input" name="image" type="file">
                             <span class="help">For the best format and resolution, the picture uploaded should be 800x600 or at least a 4x3 ratio.</span>
                         </p>
                     </div>
