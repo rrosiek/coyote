@@ -22,6 +22,9 @@
         <li class="{{ starts_with(Route::currentRouteName(), 'minutes') ? 'is-active' : '' }}">
             <a href="{{ route('minutes.admin') }}">Minutes</a>
         </li>
+        <li class="{{ starts_with(Route::currentRouteName(), 'files') ? 'is-active' : '' }}">
+            <a href="{{ route('files.index') }}">Files</a>
+        </li>
         <li>
             <a href="{{ route('logout') }}">Logout</a>
         </li>

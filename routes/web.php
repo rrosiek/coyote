@@ -2,10 +2,11 @@
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
+    Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
     Route::resource('events', 'Event', ['except' => ['show']]);
+    Route::resource('files', 'File', ['except' => ['edit', 'show', 'update']]);
     Route::resource('pages', 'Page');
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
-    Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
 
     Route::get('/', function () {
         return redirect()->route('pages.index');
@@ -29,6 +30,8 @@ Route::post('admin/minutes', 'Minutes@store')->name('minutes.store')->middleware
 Route::get('admin/minutes', 'Minutes@index')->name('minutes.admin')->middleware('admin');
 Route::get('members/minutes/{token}', 'Minutes@show')->name('minutes.show');
 Route::get('members/minutes', 'Minutes@index')->name('minutes.members')->middleware('auth');
+
+Route::get('files/{token}', 'File@show')->name('files.show');
 
 Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
 
