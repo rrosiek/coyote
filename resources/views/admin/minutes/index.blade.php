@@ -3,6 +3,7 @@
 @section('admin.body')
 
 <div class="container is-fluid">
+    @include('partials.notify')
     <div class="level">
         <div class="level-left">
             <p class="level-item">

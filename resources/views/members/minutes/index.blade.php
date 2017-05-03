@@ -3,7 +3,6 @@
 @section('members.body')
 
 <div class="container is-fluid">
-    @include('partials.notify')
     <div class="level">
         <div class="level-right">
             {{ $minutes->links() }}

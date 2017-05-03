@@ -5,8 +5,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
     Route::resource('events', 'Event', ['except' => ['show']]);
     Route::resource('files', 'File', ['except' => ['edit', 'show', 'update']]);
+    Route::resource('minutes', 'Minutes', ['only' => ['create', 'destroy', 'store']]);
+    Route::resource('newsletters', 'Newsletter', ['only' => ['create', 'destroy', 'store']]);
     Route::resource('pages', 'Page');
     Route::resource('users', 'User', ['only' => ['edit', 'index', 'update']]);
+
+    Route::get('minutes', 'Minutes@index')->name('minutes.admin');
+    Route::get('newsletters', 'Newsletter@index')->name('newsletters.admin');
 
     Route::get('/', function () {
         return redirect()->route('pages.index');
@@ -18,29 +23,14 @@ Route::group(['prefix' => 'members', 'middleware' => ['auth']], function () {
 
     Route::resource('profiles', 'Profile', ['except' => ['create', 'destroy', 'store']]);
 
+    Route::get('minutes', 'Minutes@index')->name('minutes.members');
+    Route::get('newsletters', 'Newsletter@index')->name('newsletters.members');
+
     Route::get('/', function () {
         return redirect()->route('profiles.edit', Auth::user());
     })->name('members');
 
 });
-
-Route::get('admin/minutes/create', 'Minutes@create')->name('minutes.create')->middleware('admin');
-Route::delete('admin/minutes/{minutes}', 'Minutes@destroy')->name('minutes.destroy')->middleware('admin');
-Route::post('admin/minutes', 'Minutes@store')->name('minutes.store')->middleware('admin');
-Route::get('admin/minutes', 'Minutes@index')->name('minutes.admin')->middleware('admin');
-Route::get('members/minutes/{token}', 'Minutes@show')->name('minutes.show');
-Route::get('members/minutes', 'Minutes@index')->name('minutes.members')->middleware('auth');
-
-Route::get('admin/newsletters/create', 'Newsletter@create')->name('newsletters.create')->middleware('admin');
-Route::delete('admin/newsletters/{newsletter}', 'Newsletter@destroy')->name('newsletters.destroy')->middleware('admin');
-Route::post('admin/newsletters', 'Newsletter@store')->name('newsletters.store')->middleware('admin');
-Route::get('admin/newsletters', 'Newsletter@index')->name('newsletters.admin')->middleware('admin');
-Route::get('members/newsletters/{token}', 'Newsletter@show')->name('newsletters.show');
-Route::get('members/newsletters', 'Newsletter@index')->name('newsletters.members')->middleware('auth');
-
-Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
-
-Route::get('files/{token}', 'File@show')->name('files.show');
 
 Route::get('events', function () {
     $title = 'Events';
@@ -48,6 +38,11 @@ Route::get('events', function () {
 
     return view('events', compact('title', 'events'));
 })->name('events.list');
+
+Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
+Route::get('members/minutes/{token}', 'Minutes@show')->name('minutes.show');
+Route::get('members/newsletters/{token}', 'Newsletter@show')->name('newsletters.show');
+Route::get('files/{token}', 'File@show')->name('files.show');
 
 Route::get('payments', 'Payment@create')->name('payments');
 Route::post('payments', 'Payment@store');
