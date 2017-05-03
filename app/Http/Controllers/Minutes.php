@@ -66,17 +66,17 @@ class Minutes extends Controller
     }
 
     /**
-     * @param  \App\Models\Minutes $minutes
+     * @param  \App\Models\Minutes $minute
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Model $minutes)
+    public function destroy(Model $minute)
     {
-        Storage::delete($minutes->upload->file_path);
-        $minutes->upload()->delete();
-        $minutes->delete();
+        Storage::delete($minute->upload->file_path);
+        $minute->upload()->delete();
+        $minute->delete();
 
         return redirect()
             ->route('minutes.admin')
-            ->with('successMsg', sprintf('Minutes for %s have been deleted.', $minutes->meeting_date->toFormattedDateString()));
+            ->with('successMsg', sprintf('Minutes for %s have been deleted.', $minute->meeting_date->toFormattedDateString()));
     }
 }
