@@ -31,9 +31,16 @@ Route::get('admin/minutes', 'Minutes@index')->name('minutes.admin')->middleware(
 Route::get('members/minutes/{token}', 'Minutes@show')->name('minutes.show');
 Route::get('members/minutes', 'Minutes@index')->name('minutes.members')->middleware('auth');
 
-Route::get('files/{token}', 'File@show')->name('files.show');
+Route::get('admin/newsletters/create', 'Newsletter@create')->name('newsletters.create')->middleware('admin');
+Route::delete('admin/newsletters/{newsletter}', 'Newsletter@destroy')->name('newsletters.destroy')->middleware('admin');
+Route::post('admin/newsletters', 'Newsletter@store')->name('newsletters.store')->middleware('admin');
+Route::get('admin/newsletters', 'Newsletter@index')->name('newsletters.admin')->middleware('admin');
+Route::get('members/newsletters/{token}', 'Newsletter@show')->name('newsletters.show');
+Route::get('members/newsletters', 'Newsletter@index')->name('newsletters.members')->middleware('auth');
 
 Route::get('members/lifetime', 'Lifetime@index')->name('lifetime');
+
+Route::get('files/{token}', 'File@show')->name('files.show');
 
 Route::get('events', function () {
     $title = 'Events';

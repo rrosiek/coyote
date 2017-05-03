@@ -16,6 +16,9 @@
         <li class="{{ starts_with(Route::currentRouteName(), 'minutes') ? 'is-active' : '' }}">
             <a href="{{ route('minutes.members') }}">Minutes</a>
         </li>
+        <li class="{{ starts_with(Route::currentRouteName(), 'newsletters') ? 'is-active' : '' }}">
+            <a href="{{ route('newsletters.members') }}">Newsletters</a>
+        </li>
         <li class="{{ starts_with(Route::currentRouteName(), 'lifetime') ? 'is-active' : '' }}">
             <a href="{{ route('lifetime') }}">Lifetime</a>
         </li>
