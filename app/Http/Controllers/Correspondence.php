@@ -5,6 +5,7 @@ use App\Http\Requests\StoreCorrespondence;
 use App\Jobs\ProcessCorrespondence;
 use App\Mail\PreviewCorrespondence;
 use App\Models\Correspondence as Model;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -72,6 +73,7 @@ class Correspondence extends Controller
      */
     public function handleMailHook(Request $request)
     {
+        // TODO: refactor hook logic
         if (!$this->verifyMailHook($request->all()))
             return response(null, 406);
 
