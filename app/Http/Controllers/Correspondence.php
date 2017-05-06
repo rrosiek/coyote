@@ -86,7 +86,7 @@ class Correspondence extends Controller
             $msg->opens++;
             $msg->save();
         } elseif ($request->event === 'dropped') {
-            $failures = json_decode($msg->failures);
+            $failures = json_decode($msg->failures) ?? [];
             array_push($failures, $request->only(
                 'recipient',
                     'domain',
