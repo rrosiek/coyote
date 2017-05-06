@@ -4,7 +4,6 @@ namespace App\Jobs;
 use App\Mail\SendCorrespondence;
 use App\Models\Correspondence;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -35,15 +34,12 @@ class ProcessCorrespondence implements ShouldQueue
      */
     public function handle()
     {
-        $when = Carbon::now()->addSeconds(15);
         $recipients = User::where([
             ['active', true],
             ['subscribed', true],
         ])->pluck('email');
 
-        foreach ($recipients as $r) {
-            Mail::to($r)->later($when, new SendCorrespondence($this->msg));
-            $when->addSeconds(5);
-        }
+        foreach ($recipients as $r)
+            Mail::to($r)->send(new SendCorrespondence($this->msg));
     }
 }

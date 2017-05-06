@@ -33,7 +33,7 @@
                     <td>{{ $m->subject }}</td>
                     <td>{{ $m->author->name }}</td>
                     <td>{{ $m->opens }}</td>
-                    <td>{{ $m->failures }}</td>
+                    <td>{{ array_count(json_decode($m->failures) ?? []) }}</td>
                     <td>{{ $m->deliveries }}</td>
                     <td>{{ $m->created_at }}</td>
                 </tr>
