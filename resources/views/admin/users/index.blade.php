@@ -74,7 +74,7 @@
                         @else
                             <span class="tag is-dark">No</span>
                             @if ($u->email_failed)
-                                Sending e-mail failed to this user and has been unsubscribed: {{ $u->email_failed }}
+                                Sending e-mail failed and has been unsubscribed, reason: <em>{{ $u->email_failed }}</em>
                             @endif
                         @endif
                     </td>
