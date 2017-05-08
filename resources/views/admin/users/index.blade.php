@@ -117,7 +117,7 @@
         </div>
         <div class="field">
             <p class="control">
-                <button class="button is-primary is-medium" type="submit" v-is-loading="">Save</button>
+                <button class="button is-primary is-medium" type="submit" v-is-loading="">Run</button>
             </p>
         </div>
     </form>

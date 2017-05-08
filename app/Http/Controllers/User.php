@@ -51,6 +51,6 @@ class User extends Controller
         $user->is_admin = $request->has('is_admin');
         $user->save();
 
-        return redirect()->route('users.index', $user)->with('successMsg', 'User info has been updated');
+        return redirect()->route('users.index')->with('successMsg', 'User info has been updated');
     }
 }
