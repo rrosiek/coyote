@@ -19,6 +19,9 @@
         <li class="{{ starts_with(Route::currentRouteName(), 'correspondence') ? 'is-active' : '' }}">
             <a href="{{ route('correspondence.index') }}">Correspondence</a>
         </li>
+        <li class="{{ starts_with(Route::currentRouteName(), 'maillists') ? 'is-active' : '' }}">
+            <a href="{{ route('maillists.index') }}">Mailing Lists</a>
+        </li>
         <li class="{{ starts_with(Route::currentRouteName(), 'minutes') ? 'is-active' : '' }}">
             <a href="{{ route('minutes.admin') }}">Minutes</a>
         </li>

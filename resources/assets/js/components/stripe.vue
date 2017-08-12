@@ -101,14 +101,14 @@ export default {
                     })
                 } else if (result.error) {
                     this.inError = true
-                    this.cardErrorText = result.error.message;
+                    this.cardErrorText = result.error.message
                 }
             });
         }
     },
     mounted () {
-        this.stripe = Stripe(window.Laravel.stripeKey);
-        let elements = this.stripe.elements();
+        this.stripe = Stripe(window.Laravel.stripeKey)
+        let elements = this.stripe.elements()
         this.card = elements.create('card', {
             hidePostalCode: true,
             style: {
@@ -126,7 +126,7 @@ export default {
             }
         })
 
-        this.card.mount('#cardElement');
+        this.card.mount('#cardElement')
         this.card.on('change', event => this.cardValid = event.complete)
     },
     name: 'Stripe',

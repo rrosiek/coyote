@@ -5,6 +5,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('correspondence', 'Correspondence', ['except' => ['edit', 'destroy', 'update']]);
     Route::resource('events', 'Event', ['except' => ['show']]);
     Route::resource('files', 'File', ['except' => ['edit', 'show', 'update']]);
+    Route::resource('maillists', 'MailList', ['except' => ['show']]);
     Route::resource('minutes', 'Minutes', ['only' => ['create', 'destroy', 'store']]);
     Route::resource('newsletters', 'Newsletter', ['only' => ['create', 'destroy', 'store']]);
     Route::resource('pages', 'Page');
