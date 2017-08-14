@@ -32,7 +32,7 @@
                         {{ csrf_field() }}
                         <p class="control has-addons is-hover-visible">
                             <a href="{{ route('maillists.edit', ['address' => $l->address]) }}" class="button">Edit Members</a> 
-                            <button class="button" type="submit">Delete</button>
+                            <button class="button" type="submit" v-is-loading="">Delete</button>
                         </p>
                     </form>
                 </td>

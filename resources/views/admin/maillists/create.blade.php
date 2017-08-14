@@ -3,6 +3,7 @@
 @section('admin.body')
 
 <div class="container is-fluid">
+    @include('partials.notify')
     <form action="{{ route('maillists.store') }}" method="post">
         {{ csrf_field() }}
 
@@ -46,12 +47,6 @@
                     </p>
                     <p class="help">By default, <em>anyone</em> can email the group.  To only accept messages from list members, select <em>List members only</em>.</p>
                 </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-half">
-                @include('partials.textareaInput', ['name' => 'members', 'label' => 'Members', 'value' => '', 'required' => true])
-                <p class="help">Enter one email address per line.</p>
             </div>
         </div>
         <button class="button is-medium is-primary" type="submit" v-is-loading="">SAVE</button>

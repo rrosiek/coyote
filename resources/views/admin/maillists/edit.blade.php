@@ -4,26 +4,18 @@
 
 <div class="container is-fluid">
     @include('partials.notify')
-    <div class="columns">
-        <div class="column is-one-third">
-            <label class="label is-required">Member Email</label>
-            <form class="field has-addons" action="{{ route('maillists.update', request('address')) }}" method="post">
+    <form action="{{ route('maillists.update', $maillist) }}" method="post">
+        <div class="columns">
+            <div class="column is-one-third">
                 {{ method_field('PUT') }}
                 {{ csrf_field() }}
-                <p class="control is-expanded">
-                    <input class="input" name="address" type="text" value="{{ old('address') }}">
-                </p>
-                <p class="control">
-                    <button class="button is-primary" type="submit">
-                        Add
-                    </button>
-                </p>
-            </form>
-            @if ($errors->has('address'))
-                <span class="help is-danger">{{ $errors->first('address') }}</span>
-            @endif
+                @include('partials.textareaInput', ['name' => 'members', 'label' => 'Members', 'value' => '', 'required' => true])
+                <p class="help">Enter one email address per line.</p>
+            </div>
         </div>
-    </div>
+        <button class="button is-primary" type="submit" v-is-loading="">Add Addresses</button>
+    </form>
+    <hr>
     <div class="columns">
         <div class="column is-one-third">
             <table class="table">
@@ -32,9 +24,14 @@
                         <tr>
                             <td>{{ $m->address }}</td>
                             <td>
-                                <p class="control has-addons is-hover-visible">
-                                    <button class="button is-small is-danger is-outlined">Remove</button>
-                                </p>
+                                <form action="{{ route('maillists.destroy', $maillist) }}" method="post">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_address" value="{{ $m->address }}">
+                                    <p class="control has-addons is-hover-visible">
+                                        <button class="button is-small is-danger is-outlined" type="submit" v-is-loading="">Delete</button>
+                                    </p>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

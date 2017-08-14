@@ -10,9 +10,7 @@ class StoreMailList extends Request
     {
         return [
             'name' => ['required', 'max:255'],
-            'address' => ['required', 'email'],
             'access_level' => ['required', 'in:everyone,members'],
-            'members.*' => ['email'],
         ];
     }
 }
