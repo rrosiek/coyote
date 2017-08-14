@@ -15,28 +15,23 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Description</th>
                 <th>Address</th>
                 <th>No. of Members</th>
-                <th>Created</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($lists as $l)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $l->name }}</td>
+                <td>{{ $l->address }}</td>
+                <td>{{ $l->members_count }}</td>
                 <td>
-                    <form action="{{ route('maillists.destroy', $l) }}" method="post">
+                    <form action="{{ route('maillists.destroy', $l->address) }}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <p class="control has-addons is-hover-visible">
-                            <a href="{{ route('minutes.show', ['token' => $m->upload->token]) }}" class="button">Download</a>
-                            <a class="button" v-clipboard="{ text: '{{ route('minutes.show', ['token' => $m->upload->token]) }}' }">
-                                Copy URL
-                            </a>
+                            <a href="{{ route('maillists.edit', ['address' => $l->address]) }}" class="button">Edit Members</a> 
                             <button class="button" type="submit">Delete</button>
                         </p>
                     </form>
