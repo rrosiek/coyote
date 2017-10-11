@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Events\UserSaved;
@@ -54,7 +55,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $events = [
+    protected $dispatchesEvents = [
         'saving' => UserSaved::class,
     ];
 
