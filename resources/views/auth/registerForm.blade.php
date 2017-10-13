@@ -64,6 +64,11 @@
 </div>
 <div class="columns">
     <div class="column">
+        @include('partials.selectInput', ['name' => 'big', 'label' => 'Big', 'values' => $brothers, 'value' => $user->big->first() ? $user->big->first()->id : 0])
+    </div>
+</div>
+<div class="columns">
+    <div class="column">
         @include('partials.checkboxInput', ['name' => 'subscribed', 'label' => 'Subscribe to alumni e-mails from this site', 'value' => $user->subscribed])
     </div>
 </div>

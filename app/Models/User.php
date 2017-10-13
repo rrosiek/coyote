@@ -60,6 +60,22 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function littles()
+    {
+        return $this->belongsToMany(User::class, 'brother_relations', 'user_id', 'little_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function big()
+    {
+        return $this->belongsToMany(User::class, 'brother_relations', 'little_id', 'user_id');
+    }
+
+    /**
      * @return string
      */
     public function getFullAddressAttribute()

@@ -16,6 +16,8 @@ class GeocodeUserAddress implements ShouldQueue
      */
     public function handle(UserSaved $event)
     {
+        // TODO: check and see if address attributes have even been changed
+        // before firing this request: if ($event->user->isDirty(['city', 'state'])), etc
         $coords = $this->getCoords($event->user->fullAddress);
 
         User::where('id', $event->user->id)->update([

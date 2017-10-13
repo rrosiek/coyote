@@ -31,8 +31,12 @@ class User extends Controller
     {
         $title = $user->name;
         $subtitle = 'Update User';
+        $brothers = Model::orderBy('last_name')->get()->mapWithKeys(function ($brother) {
+            return [$brother['id'] => $brother['last_name'] . ', ' . $brother['first_name']];
+        });
+        $brothers->prepend('', 0);
 
-        return view('admin.users.edit', compact('title', 'subtitle', 'user'));
+        return view('admin.users.edit', compact('title', 'subtitle', 'user', 'brothers'));
     }
 
     /**
@@ -47,6 +51,7 @@ class User extends Controller
             $user->email_failed = null;
 
         $user->fill($request->all());
+        $user->big()->sync($request->big > 0 ? [$request->big] : []);
         $user->subscribed = $request->has('subscribed');
         $user->lifetime_member = $request->has('lifetime_member');
         $user->is_admin = $request->has('is_admin');

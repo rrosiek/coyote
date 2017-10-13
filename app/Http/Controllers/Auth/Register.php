@@ -32,9 +32,15 @@ class Register extends Controller
      */
     public function showRegistrationForm()
     {
+        $brothers = User::orderBy('last_name')->get()->mapWithKeys(function ($brother) {
+            return [$brother['id'] => $brother['last_name'] . ', ' . $brother['first_name']];
+        });
+        $brothers->prepend('', 0);
+
         return view('auth.register', [
             'title' => 'Register',
             'user' => new User(['subscribed' => true]),
+            'brothers' => $brothers,
         ]);
     }
 
@@ -58,6 +64,7 @@ class Register extends Controller
             'grad_year' => ['nullable', 'integer', 'min:1985' ,'max:2100'],
             'roll_number' => ['nullable' , 'integer', 'min:0', 'max:5000'],
             'employer' => ['max:255'],
+            'big' => ['integer'],
         ]);
     }
 
@@ -69,6 +76,7 @@ class Register extends Controller
     {
         $user = new User($data);
         $user->password = bcrypt($data['password']);
+        $user->big()->sync($request->big > 0 ? [$request->big] : []);
         $user->subscribed = array_key_exists('subscribed', $data);
         $user->activate_token = Str::random(60);
         $user->save();
@@ -83,7 +91,7 @@ class Register extends Controller
     public function register(Request $request)
     {
         $msg = 'You will receive an email confirmation when your account has been approved by an administrator.';
-        
+
         $this->validator($request->all())->validate();
         event(new Registered($this->create($request->all())));
 
@@ -94,7 +102,7 @@ class Register extends Controller
 
         return redirect()->route('login')->with('successMsg', $msg);
     }
-    
+
     /**
      * @param  string $token
      * @return \Illuminate\Http\Response

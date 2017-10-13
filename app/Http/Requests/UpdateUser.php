@@ -23,6 +23,7 @@ class UpdateUser extends Request
             'grad_year' => ['nullable', 'integer', 'min:1985' ,'max:2100'],
             'roll_number' => ['nullable' , 'integer', 'min:0', 'max:5000'],
             'employer' => ['max:255'],
+            'big' => ['integer'],
         ];
     }
 }

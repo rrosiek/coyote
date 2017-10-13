@@ -56,8 +56,12 @@ class Profile extends Controller
 
         $title = $profile->name;
         $subtitle = 'Update Profile';
+        $brothers = Model::orderBy('last_name')->get()->mapWithKeys(function ($brother) {
+            return [$brother['id'] => $brother['last_name'] . ', ' . $brother['first_name']];
+        });
+        $brothers->prepend('', 0);
 
-        return view('members.profiles.edit', compact('title', 'subtitle', 'profile'));
+        return view('members.profiles.edit', compact('title', 'subtitle', 'profile', 'brothers'));
     }
 
     /**
@@ -75,6 +79,7 @@ class Profile extends Controller
             $profile->email_failed = null;
 
         $profile->fill($request->all());
+        $profile->big()->sync($request->big > 0 ? [$request->big] : []);
         $profile->subscribed = $request->has('subscribed');
         $profile->lifetime_member = $request->has('lifetime_member');
         $profile->is_admin = $request->has('is_admin');
