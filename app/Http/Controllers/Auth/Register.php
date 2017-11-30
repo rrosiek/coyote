@@ -76,7 +76,7 @@ class Register extends Controller
     {
         $user = new User($data);
         $user->password = bcrypt($data['password']);
-        $user->big()->sync($request->big > 0 ? [$request->big] : []);
+        $user->big()->sync($data['big'] > 0 ? [$data['big']] : []);
         $user->subscribed = array_key_exists('subscribed', $data);
         $user->activate_token = Str::random(60);
         $user->save();
