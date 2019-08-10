@@ -10,8 +10,8 @@ export default {
     },
     data () {
         return {
-            localLat: '44.6696807',
-            localLng: '-75.0049451',
+            localLat: 44.6696807,
+            localLng: -75.0049451,
             map: null,
             markerCluster: null,
             markers: []
@@ -87,7 +87,7 @@ export default {
         }
     },
     mounted () {
-        Promise.all([this.fetchLocation(), this.fetchMarkers()]).then(() => {
+        this.fetchMarkers().then(() => {
             this.initMap()
             this.markerCluster = new MarkerClusterer(
                 this.map,

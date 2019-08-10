@@ -18,9 +18,10 @@
     "eslint-plugin-standard": "2.0.1",
     "jsonp": "0.2.1",
     "laravel-mix": "0.10.0",
-    "vue": "2.3.0"
+    "vue": "2.4.4"
   },
   "dependencies": {
-    "clipboard": "1.6.1"
+    "clipboard": "1.6.1",
+    "node-sass": "^4.12.0"
   }
 }
