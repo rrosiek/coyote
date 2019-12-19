@@ -3,7 +3,7 @@ defmodule Coyote.Repo.Migrations.CreateCorrespondence do
 
   def change do
     create table(:correspondence) do
-      add :user_id, references(:users)
+      add :user_id, references(:users, on_delete: :nothing)
       add :subject, :string
       add :body, :text
       add :opens, :integer, default: 0

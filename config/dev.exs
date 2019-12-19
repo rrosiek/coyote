@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :coyote, Coyote.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "rrosiek",
+  password: "secret",
   database: "coyote_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

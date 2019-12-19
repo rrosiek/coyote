@@ -3,8 +3,8 @@ defmodule Coyote.Repo.Migrations.CreateBrotherRelations do
 
   def change do
     create table(:brother_relations) do
-      add :user_id, references(:users)
-      add :little_id, references(:users)
+      add :user_id, references(:users, on_delete: :delete_all)
+      add :little_id, references(:users, on_delete: :delete_all)
     end
   end
 end

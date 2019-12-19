@@ -3,7 +3,7 @@ defmodule Coyote.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :role_id, references(:roles)
+      add :role_id, references(:roles, on_delete: :nothing)
       add :email, :string, null: false
       add :password_hash, :string, null: false
       add :email_verified_at, :utc_datetime

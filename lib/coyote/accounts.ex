@@ -8,6 +8,8 @@ defmodule Coyote.Accounts do
 
   alias Coyote.Accounts.User
 
+  @paginate_size 25
+
   @doc """
   Returns the list of users.
 
@@ -17,8 +19,25 @@ defmodule Coyote.Accounts do
       [%User{}, ...]
 
   """
-  def list_users do
-    Repo.all(User)
+  def list_users(params) do
+    with page <- Map.get(params, "page", 1),
+         total_entries <- Repo.aggregate(User, :count, :id) do
+      users =
+        User
+        |> order_by(asc: :last_name)
+        |> limit(@paginate_size)
+        |> offset((^page - 1) * @paginate_size)
+        |> Repo.all()
+        |> Enum.map(fn x -> Map.delete(x, :password_hash) end)
+
+      %{
+        :users => users,
+        :page_size => @paginate_size,
+        :page_number => page,
+        :total_entries => total_entries,
+        :total_pages => ceil(total_entries / @paginate_size)
+      }
+    end
   end
 
   @doc """
