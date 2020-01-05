@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :coyote, Coyote.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "rrosiek",
+  password: "secret",
   database: "coyote_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

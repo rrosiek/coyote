@@ -10,11 +10,7 @@ defmodule Coyote.Repo.Migrations.CreateUsers do
       add :receives_email, :boolean, null: false
       add :first_name, :string, null: false
       add :last_name, :string, null: false
-      add :address1, :string
-      add :address2, :string
-      add :city, :string
-      add :state, :string
-      add :zip, :string
+      add :address, :string
       add :phone, :string
       add :grad_year, :integer
       add :roll_number, :integer

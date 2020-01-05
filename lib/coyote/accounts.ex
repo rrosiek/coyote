@@ -11,12 +11,18 @@ defmodule Coyote.Accounts do
   @paginate_size 25
 
   @doc """
-  Returns the list of users.
+  Returns paginated list of users.
 
   ## Examples
 
       iex> list_users()
-      [%User{}, ...]
+      {
+        users: [%User{}, ...],
+        page_size: 25,
+        page_number: 1,
+        total_entries: 20,
+        total_pages: 4
+      }
 
   """
   def list_users(params) do
@@ -28,7 +34,6 @@ defmodule Coyote.Accounts do
         |> limit(@paginate_size)
         |> offset((^page - 1) * @paginate_size)
         |> Repo.all()
-        |> Enum.map(fn x -> Map.delete(x, :password_hash) end)
 
       %{
         :users => users,
@@ -70,7 +75,7 @@ defmodule Coyote.Accounts do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.create(attrs)
     |> Repo.insert()
   end
 
@@ -88,7 +93,7 @@ defmodule Coyote.Accounts do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.update(attrs)
     |> Repo.update()
   end
 
@@ -118,6 +123,6 @@ defmodule Coyote.Accounts do
 
   """
   def change_user(%User{} = user) do
-    User.changeset(user, %{})
+    User.create(user, %{})
   end
 end
