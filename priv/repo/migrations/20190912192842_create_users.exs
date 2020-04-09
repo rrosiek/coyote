@@ -5,7 +5,7 @@ defmodule Coyote.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :role_id, references(:roles, on_delete: :nothing)
       add :email, :string, null: false
-      add :password_hash, :string, null: false
+      add :password_hash, :string
       add :email_verified_at, :utc_datetime
       add :receives_email, :boolean, null: false
       add :first_name, :string, null: false
@@ -22,5 +22,8 @@ defmodule Coyote.Repo.Migrations.CreateUsers do
 
       timestamps()
     end
+
+    create unique_index(:users, [:email])
+    create index(:users, [:last_name])
   end
 end

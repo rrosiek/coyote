@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :coyote,
   ecto_repos: [Coyote.Repo]
@@ -24,6 +24,12 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Pow auth
+config :coyote, :pow,
+  user: Coyote.Accounts.User,
+  repo: Coyote.Repo,
+  web_module: Coyote
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

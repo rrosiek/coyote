@@ -2,10 +2,7 @@
 
 <%= link "New user", to: Routes.user_path(@conn, :new) %>
 
-<p><%= @page.page_number %></p>
-<p><%= @page.page_size %></p>
-<p><%= @page.total_pages %></p>
-<p><%= @page.total_entries %></p>
+<%= pagination_links(@conn, @page) %>
 
 <table class="table">
   <thead>
@@ -20,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-  <%= for user <- @page.users do %>
+  <%= for user <- @page do %>
     <tr>
       <td><%= user.last_name %>, <%= user.first_name %></td>
       <td><%= user.email %></td>

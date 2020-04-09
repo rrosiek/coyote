@@ -1,6 +1,5 @@
 defmodule Coyote.AccountsTest do
   use Coyote.DataCase
-
   alias Coyote.Accounts
 
   describe "users" do
@@ -23,7 +22,11 @@ defmodule Coyote.AccountsTest do
       lifetime_member: false
     }
 
-    @update_attrs %{}
+    @update_attrs %{
+      current_password: "test1234",
+      email: "email-1@example.com",
+      employer: "Acme Corp"
+    }
 
     @invalid_attrs %{
       email: "not-and-email",
@@ -38,6 +41,7 @@ defmodule Coyote.AccountsTest do
         |> Accounts.create_user()
 
       user
+      |> Map.put(:password, nil)
     end
 
     test "list_users/0 returns all users" do
@@ -67,7 +71,8 @@ defmodule Coyote.AccountsTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
+      assert {:ok, %User{} = updated_user} = Accounts.update_user(user, @update_attrs)
+      assert user.email != updated_user.email
     end
 
     test "update_user/2 with invalid data returns error changeset" do

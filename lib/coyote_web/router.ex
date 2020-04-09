@@ -9,6 +9,11 @@ defmodule CoyoteWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
   scope "/", CoyoteWeb do
     pipe_through :browser
 

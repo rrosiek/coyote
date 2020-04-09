@@ -5,10 +5,7 @@ defmodule Coyote.Accounts do
 
   import Ecto.Query, warn: false
   alias Coyote.Repo
-
   alias Coyote.Accounts.User
-
-  @paginate_size 25
 
   @doc """
   Returns paginated list of users.
@@ -18,31 +15,17 @@ defmodule Coyote.Accounts do
       iex> list_users()
       {
         users: [%User{}, ...],
-        page_size: 25,
         page_number: 1,
-        total_entries: 20,
-        total_pages: 4
+        page_size: 25,
+        total_pages: 4,
+        total_entries: 20
       }
 
   """
   def list_users(params) do
-    with page <- Map.get(params, "page", 1),
-         total_entries <- Repo.aggregate(User, :count, :id) do
-      users =
-        User
-        |> order_by(asc: :last_name)
-        |> limit(@paginate_size)
-        |> offset((^page - 1) * @paginate_size)
-        |> Repo.all()
-
-      %{
-        :users => users,
-        :page_size => @paginate_size,
-        :page_number => page,
-        :total_entries => total_entries,
-        :total_pages => ceil(total_entries / @paginate_size)
-      }
-    end
+    User
+    |> order_by(asc: :last_name)
+    |> Repo.paginate(params)
   end
 
   @doc """

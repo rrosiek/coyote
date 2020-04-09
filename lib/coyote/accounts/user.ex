@@ -1,11 +1,9 @@
 defmodule Coyote.Accounts.User do
   use Ecto.Schema
+  use Pow.Ecto.Schema, password_hash_methods: {&Bcrypt.hash_pwd_salt/1, &Bcrypt.verify_pass/2}
   import Ecto.Changeset
 
   @cast_members [
-    :email,
-    :password,
-    :password_confirmation,
     :receives_email,
     :last_name,
     :first_name,
@@ -21,10 +19,6 @@ defmodule Coyote.Accounts.User do
   ]
 
   schema "users" do
-    field :email, :string
-    field :password, :string, virtual: true
-    field :password_confirmation, :string, virtual: true
-    field :password_hash, :string
     field :email_verified_at, :utc_datetime
     field :receives_email, :boolean
     field :first_name, :string
@@ -39,17 +33,20 @@ defmodule Coyote.Accounts.User do
     field :lifetime_member, :boolean
     field :deceased, :utc_datetime
 
+    pow_user_fields()
+
     timestamps()
   end
 
-  @doc false
+  @doc """
+  Validate a new user.
+  """
+  @spec create(User, Map.t()) :: Ecto.Changeset.t()
   def create(user, attrs) do
     user
+    |> pow_changeset(attrs)
     |> cast(attrs, @cast_members)
     |> validate_required([
-      :email,
-      :password,
-      :password_confirmation,
       :receives_email,
       :last_name,
       :first_name
@@ -57,32 +54,21 @@ defmodule Coyote.Accounts.User do
     |> validate_common
   end
 
-  @doc false
+  @doc """
+  Validate an existing user.
+  """
+  @spec update(User, Map.t()) :: Ecto.Changeset.t()
   def update(user, attrs) do
     user
+    |> pow_user_id_field_changeset(attrs)
+    # |> pow_current_password_changeset(attrs)
+    # |> new_password_changeset(attrs, @pow_config)
     |> cast(attrs, @cast_members)
     |> validate_common
   end
 
-  defp downcase_email(changeset) do
-    update_change(changeset, :email, &String.downcase/1)
-  end
-
-  defp put_password_hash(
-         %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
-       ) do
-    change(changeset, Bcrypt.add_hash(password))
-  end
-
-  defp put_password_hash(changeset), do: changeset
-
   defp validate_common(changeset) do
     changeset
-    |> validate_confirmation(:password)
-    |> put_change(:password_confirmation, nil)
-    |> put_password_hash
-    |> downcase_email
-    |> validate_length(:email, min: 5, max: 255)
     |> validate_date_type(:email_verified_at)
     |> validate_inclusion(:receives_email, [true, false])
     |> validate_length(:last_name, max: 255)
@@ -102,15 +88,13 @@ defmodule Coyote.Accounts.User do
     |> unique_constraint(:email)
   end
 
-  defp validate_date_type(%{changes: changes} = changeset, field) do
-    if date = changes[field] do
+  defp validate_date_type(changeset, field) do
+    validate_change(changeset, field, fn _, date ->
       case DateTime.from_iso8601(date) do
-        {:ok, _, _} -> changeset
-        {:error, :invalid_format} -> add_error(changeset, field, "is not a valid date")
+        {:ok, _, _} -> []
+        {:error, :invalid_format} -> [{field, "is not a valid date"}]
       end
-    else
-      changeset
-    end
+    end)
   end
 
   defp validate_location(

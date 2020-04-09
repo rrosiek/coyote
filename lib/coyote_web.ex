@@ -41,6 +41,7 @@ defmodule CoyoteWeb do
 
       import CoyoteWeb.ErrorHelpers
       import CoyoteWeb.Gettext
+      import CoyoteWeb.ViewHelpers
       alias CoyoteWeb.Router.Helpers, as: Routes
     end
   end
