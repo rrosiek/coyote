@@ -29,11 +29,11 @@ defmodule CoyoteWeb.ViewHelpers do
   end
 
   defp render_html({:next, page_number}, %Plug.Conn{} = conn) do
-    link("NEXT", to: path(conn, page_number))
+    link("NEXT", to: path(conn, page_number), class: "px-4")
   end
 
   defp render_html({:previous, page_number}, %Plug.Conn{} = conn) do
-    link("PREVIOUS", to: path(conn, page_number))
+    link("PREVIOUS", to: path(conn, page_number), class: "px-4")
   end
 
   defp render_html({:ellipsis, text}, _conn) do
@@ -41,7 +41,7 @@ defmodule CoyoteWeb.ViewHelpers do
   end
 
   defp render_html(page_number, %Plug.Conn{} = conn) when is_integer(page_number) do
-    link(page_number, to: path(conn, page_number))
+    link(page_number, to: path(conn, page_number), class: "px-2")
   end
 
   defp add_first(page_number, distance) when page_number > distance * 2 do
@@ -53,7 +53,7 @@ defmodule CoyoteWeb.ViewHelpers do
   end
 
   defp add_last(list, page_number, total_pages, distance)
-       when page_number + distance < total_pages do
+       when page_number + distance * 2 <= total_pages do
     list ++ [total_pages - 1, total_pages]
   end
 
@@ -71,7 +71,7 @@ defmodule CoyoteWeb.ViewHelpers do
   end
 
   defp add_last_ellipsis(list, page_number, total_pages, distance)
-       when page_number + distance < total_pages do
+       when page_number + distance * 2 <= total_pages do
     list ++ [{:ellipsis, "..."}]
   end
 
@@ -121,21 +121,18 @@ defmodule CoyoteWeb.ViewHelpers do
     total_pages - distance - distance * 2
   end
 
-  # defp beginning_distance(page_number, total_pages, distance) when page_number <= total_pages do
-  # page_number - distance
-  # end
-
-  # defp beginning_distance(page_number, total_pages, distance) when page_number > total_pages do
-  # total_pages - distance
-  # end
-
   defp end_distance(_page_distance, 0, _distance) do
     1
   end
 
   defp end_distance(page_number, total_pages, distance)
-       when page_number >= total_pages - distance * 2 do
+       when page_number > total_pages - distance * 2 or total_pages <= distance * 2 do
     total_pages
+  end
+
+  defp end_distance(page_number, _total_pages, distance)
+       when page_number <= distance * 2 do
+    distance + distance * 2
   end
 
   defp end_distance(page_number, _total_pages, distance) do
